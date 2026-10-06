@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datenschutzerklärung – TAP – Track &amp; Play</title>
+    <meta name="description" content="Benutzerhandbuch für TAP – Track &amp; Play, die App zum Erfassen und Auswerten eigener Magic: The Gathering-Partien.">
+    <title>Benutzerhandbuch – TAP – Track &amp; Play</title>
     <style>
         :root {
             color-scheme: light dark;
@@ -17,6 +18,8 @@
 
         * { box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             margin: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -29,7 +32,21 @@
         main {
             max-width: 860px;
             margin: 0 auto;
-            padding: 48px 24px 64px;
+            padding: 24px 24px 64px;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px 24px;
+            padding: 0 4px 20px;
+            font-size: 0.95rem;
+        }
+
+        .site-nav .brand {
+            color: var(--muted);
+            font-weight: 600;
         }
 
         .card {
@@ -41,7 +58,11 @@
 
         h1, h2 { line-height: 1.25; }
         h1 { margin-top: 0; }
-        h2 { margin-top: 2em; color: var(--accent); }
+        h2 {
+            margin-top: 2em;
+            color: var(--accent);
+            scroll-margin-top: 16px;
+        }
 
         a {
             color: var(--accent);
@@ -52,6 +73,33 @@
             margin-bottom: 2rem;
         }
 
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0 0;
+        }
+
+        hr + h2, hr + nav h2 { margin-top: 1.5em; }
+        hr + p { margin-top: 1.5em; }
+
+        ul, ol { padding-left: 1.4em; }
+        li { margin: 0.35em 0; }
+        li > ul, li > ol { margin-top: 0.35em; }
+
+        .toc h2 { margin-top: 1.5em; }
+        .toc ol {
+            columns: 2;
+            column-gap: 40px;
+        }
+        .toc li {
+            margin: 0 0 0.4em;
+            break-inside: avoid;
+        }
+        .toc a { text-decoration: none; }
+        .toc a:hover, .toc a:focus { text-decoration: underline; }
+
+        .faq { margin-top: 1.5em; }
+
         footer {
             margin-top: 3rem;
             color: var(--muted);
@@ -59,219 +107,408 @@
         }
 
         @media (max-width: 600px) {
-            main { padding: 24px 14px 40px; }
+            main { padding: 16px 14px 40px; }
             .card { padding: 22px 18px; }
+            .toc ol { columns: 1; }
         }
     </style>
 </head>
 <body>
 <main>
+    <nav class="site-nav" aria-label="Seiten">
+        <span class="brand">TAP – Track &amp; Play</span>
+        <a href="privacy/index.html">Datenschutzerklärung</a>
+    </nav>
+
     <article class="card">
-        <h1>Datenschutzerklärung</h1>
+        <h1>Track &amp; Play – Benutzerhandbuch</h1>
 
         <p class="meta">
             für die App „TAP – Track &amp; Play“<br>
-            Stand: 2. Oktober 2026
+            Stand: Oktober 2026
         </p>
 
-        <h2>1. Verantwortliche Person</h2>
-        <p>
-            Verantwortlich für die Verarbeitung personenbezogener Daten im
-            Zusammenhang mit der App „TAP – Track &amp; Play“ ist:
-        </p>
-        <p>
-            <strong>Michaela Schick</strong><br>
-            E-Mail:
-            <a href="mailto:trackandplay@mailbox.org">trackandplay@mailbox.org</a>
-        </p>
+        <p>Dieses Handbuch erklärt die Verwendung von <strong>Track &amp; Play (TAP)</strong>, der App
+        zum Erfassen und Auswerten eigener Magic: The Gathering-Partien. Es richtet
+        sich an Einsteiger ebenso wie an Nutzer, die bereits erfasste Partien
+        auswerten möchten.</p>
+        <!-- BILDPLATZHALTER: App-Icon und Startbildschirm im Überblick (als Aufmacherbild ganz oben im Handbuch). -->
 
-        <h2>2. Allgemeine Hinweise</h2>
-        <p>
-            Der Schutz deiner Daten ist uns wichtig. „TAP – Track &amp; Play“
-            wurde so konzipiert, dass die von dir in der App erfassten
-            Spiel- und Verwaltungsdaten grundsätzlich lokal auf deinem
-            Endgerät verarbeitet und gespeichert werden.
-        </p>
-        <p>
-            Für die Nutzung der App ist kein Benutzerkonto erforderlich.
-            Insbesondere werden über die App keine E-Mail-Adressen,
-            Anschriften oder sonstigen Kontaktdaten abgefragt.
-        </p>
+        <hr />
+        <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
+        <ol>
+        <li><a href="#1-erste-schritte">Erste Schritte</a></li>
+        <li><a href="#2-navigation--die-vier-hauptbereiche">Navigation – die vier Hauptbereiche</a></li>
+        <li><a href="#3-der-home-tab">Der Home-Tab</a></li>
+        <li><a href="#4-decks-verwalten">Decks verwalten</a></li>
+        <li><a href="#5-eine-neue-partie-erfassen">Eine neue Partie erfassen</a></li>
+        <li><a href="#6-live-tracking-während-der-partie">Live-Tracking während der Partie</a></li>
+        <li><a href="#7-partie-beenden-und-auswerten">Partie beenden und auswerten</a></li>
+        <li><a href="#8-partien-historie-und-detailansicht">Partien-Historie und Detailansicht</a></li>
+        <li><a href="#9-statistik">Statistik</a></li>
+        <li><a href="#10-erfolge">Erfolge</a></li>
+        <li><a href="#11-mitspieler-und-gruppen">Mitspieler und Gruppen</a></li>
+        <li><a href="#12-zusatzmodule-wheel-of-chaos-erzfeind-komplotte-planechase">Zusatzmodule: Wheel of Chaos, Erzfeind-Komplotte, Planechase</a></li>
+        <li><a href="#13-daten-exportieren-importieren-und-sichern">Daten exportieren, importieren und sichern</a></li>
+        <li><a href="#14-häufige-fragen">Häufige Fragen</a></li>
+        </ol>
+        </nav>
+        <hr />
+        <h2 id="1-erste-schritte">1. Erste Schritte</h2>
+        <p>Beim allerersten Start zeigt Track &amp; Play einen kurzen Einrichtungs-Dialog:</p>
+        <ol>
+        <li><strong>Umfang wählen:</strong> „Nur ich selbst“ (einfachste Variante – es wird nur
+        der eigene Spielverlauf erfasst) oder „Auch Mitspieler / Gruppen“ (zusätzlich
+        lassen sich Mitspieler und Spielgruppen anlegen und mitverfolgen). Diese
+        Einstellung lässt sich später jederzeit über den Schalter „Mitspieler
+        tracken“ im Home-Tab ändern.</li>
+        <li><strong>Name eingeben:</strong> Unter „Wie sollen wir dich nennen?“ wird der eigene
+        Spielername festgelegt. Dieser Spieler ist von da an der „Ich-Spieler“, auf
+        den sich alle Statistiken beziehen.</li>
+        <li><strong>Optional eine erste Spielgruppe anlegen</strong>, falls im ersten Schritt
+        „Auch Mitspieler / Gruppen“ gewählt wurde.</li>
+        <li>Mit <strong>„Fertig“</strong> abschließen – danach öffnet sich die Hauptansicht.</li>
+        </ol>
+        <!-- BILDPLATZHALTER: Der Einrichtungs-Dialog mit der Auswahl "Nur ich selbst" / "Auch Mitspieler / Gruppen" sowie dem Namensfeld. -->
 
-        <h2>3. Welche Daten werden verarbeitet?</h2>
-        <p>
-            Du kannst innerhalb der App Daten selbst anlegen. Dazu können
-            insbesondere gehören:
-        </p>
+        <hr />
+        <h2 id="2-navigation--die-vier-hauptbereiche">2. Navigation – die vier Hauptbereiche</h2>
+        <p>Nach der Einrichtung öffnet sich die Hauptansicht mit einer Navigationsleiste
+        am unteren Bildschirmrand mit vier Bereichen (Tabs):</p>
         <ul>
-            <li>frei gewählte Spielernamen,</li>
-            <li>Decknamen und Deckinformationen,</li>
-            <li>Partien, Spielergebnisse und Spielverläufe,</li>
-            <li>Statistiken und Fortschrittsdaten,</li>
-            <li>von dir vorgenommene Einstellungen.</li>
+        <li><strong>Home</strong> – Begrüßung, Elo-Score, Erinnerungen und Schnellzugriffe</li>
+        <li><strong>Decks</strong> – die eigene Deck-Sammlung</li>
+        <li><strong>Statistik</strong> – alle Auswertungen zum eigenen Spielverlauf</li>
+        <li><strong>Partien</strong> – die Partien-Historie und der Einstieg für neue Partien</li>
         </ul>
-        <p>
-            Diese Daten werden von dir selbst eingegeben bzw. durch deine
-            Nutzung der App erzeugt. Die App benötigt keine Registrierung und
-            erhebt keine verpflichtenden Identitäts- oder Kontaktdaten.
-        </p>
-        <p>
-            Bitte beachte, dass ein von dir gewählter Spielername unter
-            Umständen einen Personenbezug haben kann, wenn daraus auf eine
-            bestimmte Person geschlossen werden kann.
-        </p>
+        <p>Jeder Tab bleibt beim Wechseln im Hintergrund erhalten (z. B. bleibt eine
+        Scroll-Position in der Partien-Historie erhalten, wenn man zwischendurch in
+        die Statistik wechselt und zurückkommt).</p>
+        <!-- BILDPLATZHALTER: Die untere Navigationsleiste mit allen vier Tabs, idealerweise mit dem aktiven Tab "Home" hervorgehoben. -->
 
-        <h2>4. Lokale Speicherung</h2>
-        <p>
-            Die von dir in der App angelegten Spiel-, Deck-, Statistik- und
-            Einstellungsdaten werden lokal auf deinem Endgerät gespeichert.
-            Es erfolgt keine automatische Übertragung dieser Daten an einen
-            von der verantwortlichen Person betriebenen Server.
-        </p>
-        <p>
-            Die App verwendet für die lokale Speicherung unter anderem eine
-            lokale Datenbank sowie lokale Einstellungen.
-        </p>
+        <hr />
+        <h2 id="3-der-home-tab">3. Der Home-Tab</h2>
+        <p>Der Home-Tab ist der zentrale Einstiegspunkt und zeigt auf einen Blick:</p>
+        <ul>
+        <li><strong>Begrüßung</strong> mit dem eigenen Spielernamen.</li>
+        <li><strong>Elo-Score-Karte:</strong> ein Wert zwischen 0 und 100, der die grobe eigene
+        „Spielstärke“ relativ zu einem durchschnittlichen Gegner einschätzt und
+        sich mit jeder gewerteten Partie anpasst.</li>
+        <li><strong>Erinnerung an die letzte Partie:</strong> zeigt, wie lange die letzte erfasste
+        Partie zurückliegt.</li>
+        <li><strong>Zufalls-Deck-Karte:</strong> schlägt per Zufall eines der eigenen Decks vor,
+        praktisch für die Entscheidung „Was spiele ich heute?“.</li>
+        <li><strong>Letzte Erfolge:</strong> die zuletzt freigeschalteten Erfolgs-Abzeichen, mit
+        Link zur vollständigen Erfolge-Übersicht (siehe Kapitel 10).</li>
+        </ul>
+        <p>Darunter befinden sich zwei einklappbare Karten:</p>
+        <ul>
+        <li><strong>Schnellzugriff:</strong> Sprungmarken zu Funktionen ohne eigenen Tab –
+        Gruppen-Verwaltung, Wheel of Chaos, Erzfeind-Komplotte und Planechase
+        einrichten (jeweils nur sichtbar, wenn das zugehörige Modul aktiviert ist,
+        siehe Kapitel 12) sowie Daten-Export/-Import (siehe Kapitel 13).</li>
+        <li><strong>Weitere Optionen:</strong> globale Schalter für
+        <ul>
+        <li><em>Mitspieler tracken</em> (siehe Kapitel 11),</li>
+        <li><em>Wheel of Chaos</em>, <em>Erzfeind-Komplotte</em> und <em>Planechase</em> (siehe Kapitel 12),</li>
+        <li><em>Automatisches Backup</em> (schreibt beim Schließen der App eine
+        Sicherungsdatei in einen app-eigenen Ordner auf dem Gerät – keine Cloud,
+        kein Konto, siehe Kapitel 13),</li>
+        <li>sowie der Button <em>„Jetzt sichern“</em> für eine sofortige, zusätzliche
+        Sicherung unabhängig vom automatischen Zeitpunkt.</li>
+        </ul></li>
+        </ul>
+        <!-- BILDPLATZHALTER: Der komplette Home-Tab von oben bis unten, inklusive aufgeklappter "Weitere Optionen"-Karte mit allen Schaltern. -->
 
-        <h2>5. Export, Import und QR-Code-Austausch</h2>
-        <p>
-            Die App bietet Funktionen zum Export und Import von Daten. Diese
-            Funktionen sind insbesondere für persönliche Backups und den
-            manuellen Datenaustausch vorgesehen.
-        </p>
-        <p>
-            Außerdem können von dir ausgewählte Informationen, beispielsweise
-            zu Spielern, Decks oder Partien, für den Austausch zwischen
-            Nutzern in QR-Codes übertragen werden.
-        </p>
-        <p>
-            Diese Übertragungen werden von dir aktiv ausgelöst. Die App
-            übermittelt die betreffenden Daten dabei nicht automatisch an
-            einen zentralen Server. Bei der Weitergabe eines Exports oder
-            eines QR-Codes entscheidest du selbst, wem du die darin enthaltenen
-            Informationen zur Verfügung stellst.
-        </p>
-        <p>
-            Bitte achte deshalb darauf, mit wem du exportierte Dateien oder
-            QR-Codes teilst, da diese die von dir ausgewählten Spiel-,
-            Spieler- oder Deckinformationen enthalten können.
-        </p>
+        <hr />
+        <h2 id="4-decks-verwalten">4. Decks verwalten</h2>
+        <p>Im Tab <strong>Decks</strong> werden die eigenen Decks verwaltet:</p>
+        <ul>
+        <li>Über das <strong>„+“-Symbol</strong> unten rechts lässt sich ein neues Deck anlegen.</li>
+        <li>Im Deck-Formular werden erfasst: Deckname, Commander (optional) und
+        Partner-Commander (optional), Farbidentität, Bauart, bis zu drei
+        Archetypen, ein Power-Bracket, ob das Deck Proxy-Karten enthält, ob es
+        turnierlegal ist, ein optionaler Online-Link zum Deck (z. B. Moxfield/
+        Archidekt) sowie freie Subthemes (z. B. „Ninjutsu, Clones“).</li>
+        <li>Über das <strong>Lupe-Symbol</strong> lässt sich die Deckliste nach Deckname oder
+        Commander durchsuchen, über das Sortier-Symbol nach Name oder
+        Performance-Kennzahlen ordnen.</li>
+        <li>Decks können <strong>archiviert</strong> werden, statt sie zu löschen (z. B. wenn ein
+        Deck nicht mehr gespielt wird) – archivierte Decks lassen sich über das
+        Archiv-Symbol optional wieder einblenden.</li>
+        <li>Über das <strong>QR-Symbol</strong> an einem Deck lässt sich dieses einzelne Deck per
+        QR-Code mit einer anderen Person teilen (z. B. damit jemand das Deck in
+        der eigenen Track &amp; Play-Installation importieren kann), unabhängig vom
+        umfassenderen Export-Wizard aus Kapitel 13.</li>
+        </ul>
+        <!-- BILDPLATZHALTER: Die Deckliste mit mehreren Deck-Karten (Farbidentität, Commander, Bracket sichtbar). -->
 
-        <h2>6. Kamera</h2>
-        <p>
-            Für das Einlesen von Freigabe- bzw. Austausch-QR-Codes kann die
-            App auf die Kamera deines Endgeräts zugreifen.
-        </p>
-        <p>
-            Die Kamera wird ausschließlich für den QR-Code-Scan verwendet.
-            Die App speichert oder überträgt keine von der Kamera
-            aufgenommenen Fotos oder Videos zu eigenen Servern.
-        </p>
+        <!-- BILDPLATZHALTER: Das Deck-Formular mit allen Eingabefeldern. -->
 
-        <h2>7. Abruf von Kartendaten über Scryfall</h2>
-        <p>
-            Bestimmte Funktionen der App können auf Wunsch des Nutzers
-            Kartendaten für Magic: The Gathering, insbesondere Inhalte im
-            Zusammenhang mit Archenemy und Planechase, über die Scryfall-API
-            abrufen.
-        </p>
-        <p>
-            Dieser Abruf erfolgt nur, wenn die entsprechende Funktion
-            verwendet wird. Die App nutzt die abgerufenen Kartendaten und
-            Kartenbilder für die jeweilige Funktion und kann diese Inhalte
-            lokal auf dem Endgerät zwischenspeichern, damit sie anschließend
-            auch ohne erneuten Abruf verfügbar sind.
-        </p>
-        <p>
-            Die Kommunikation mit Scryfall erfolgt über das Internet. Für die
-            konkrete Datenverarbeitung durch Scryfall gelten zusätzlich die
-            Datenschutzinformationen von Scryfall. Weitere Informationen sind
-            auf der Website von Scryfall verfügbar:
-            <a href="https://scryfall.com/docs/privacy"
-               rel="noopener noreferrer">Scryfall – Privacy Policy</a>.
-        </p>
+        <hr />
+        <h2 id="5-eine-neue-partie-erfassen">5. Eine neue Partie erfassen</h2>
+        <p>Eine neue Partie wird über das <strong>„+“-Symbol</strong> im Partien-Tab gestartet. Dabei
+        gibt es zwei grundsätzlich unterschiedliche Vorgehensweisen, die sich oben
+        auf dem Bildschirm umschalten lassen:</p>
+        <ul>
+        <li><strong>Live erfassen:</strong> Die Partie wird während des Spielens direkt in der App
+        live mitgetrackt (Lebenspunkte, Commander-Schaden, usw. – siehe Kapitel 6).
+        Empfohlen, wenn das Gerät während der Partie griffbereit auf dem Tisch
+        liegt.</li>
+        <li><strong>Manuell nachtragen:</strong> Eine bereits gespielte Partie wird nachträglich
+        erfasst, inklusive Ergebnis, Platzierungen und Mulligans – ohne
+        Live-Mitverfolgung der Lebenspunkte. Praktisch, wenn man erst nach dem
+        Spiel zur App greift.</li>
+        </ul>
+        <p>Unabhängig vom Modus werden zunächst festgelegt:</p>
+        <ul>
+        <li>der <strong>Spielmodus</strong> (z. B. Commander, cEDH, Two-Headed Giant, Erzfeind),</li>
+        <li>optional eine <strong>Spielgruppe</strong> (nur sichtbar, wenn „Mitspieler tracken“
+        aktiv ist),</li>
+        <li>die <strong>Teilnehmer</strong> – über „Bekannten Spieler hinzufügen“ (nur bei
+        aktiviertem Mitspieler-Tracking) oder „Unbekannten Spieler hinzufügen“
+        für Gäste/Gegner ohne eigenes Profil; jedem bekannten Teilnehmer lässt
+        sich zusätzlich sein gespieltes Deck zuordnen.</li>
+        </ul>
+        <p><strong>Beim manuellen Nachtragen</strong> kommen zusätzlich hinzu: das Datum der Partie,
+        optionale Notizen, eine Bewertung der eigenen Deck-Performance (1–5 Sterne),
+        je Teilnehmer die erzielte Platzierung und die Anzahl eigener Mulligans,
+        sowie die Festlegung von Unentschieden bzw. des Siegerteams (bei Two-Headed
+        Giant) oder des Siegers (bei Erzfeind: Erzfeind oder Team).</p>
+        <p><strong>Bei der Live-Erfassung</strong> werden stattdessen festgelegt: die
+        Start-Lebenspunkte (bei Erzfeind getrennt für Erzfeind und Team), optional
+        das Zusatzmodul Planechase für diese eine Partie, sowie die
+        <strong>Tisch-Anordnung</strong> – sie bestimmt, an welcher Tischseite und mit welcher
+        Ausrichtung die Lebenspunkte-Kachel jedes Teilnehmers später angezeigt wird,
+        wenn das Gerät flach auf dem Tisch liegt. Ein Antippen eines Namens ändert
+        die zugewiesene Seite, der Button „Automatisch anordnen“ verteilt die
+        Sitzplätze passend zur Zugreihenfolge im Uhrzeigersinn.</p>
+        <p>Abgeschlossen wird mit <strong>„Manuell speichern“</strong> bzw. <strong>„Live-Erfassung
+        starten“</strong>.</p>
+        <!-- BILDPLATZHALTER: Der Neue-Partie-Screen mit der Umschaltung "Manuell nachtragen" / "Live erfassen" ganz oben. -->
 
-        <h2>8. Keine Analyse-, Werbe- oder Trackingdienste</h2>
-        <p>
-            Die App verwendet nach aktuellem Stand keine eigenen Server und
-            keine Dienste wie Google Analytics, Firebase, Crashlytics oder
-            Werbenetzwerke. Es findet daher keine Nutzung solcher Dienste zur
-            Analyse des Nutzerverhaltens, zur Ausspielung personalisierter
-            Werbung oder zur Erstellung von Nutzerprofilen durch die App
-            statt.
-        </p>
+        <!-- BILDPLATZHALTER: Die Tisch-Anordnung mit mehreren Teilnehmern und dem Button "Automatisch anordnen". -->
 
-        <h2>9. Empfänger personenbezogener Daten</h2>
-        <p>
-            Die von dir lokal angelegten Spiel- und Verwaltungsdaten werden
-            grundsätzlich nicht automatisch an Dritte übermittelt.
-        </p>
-        <p>
-            Eine Übermittlung kann insbesondere dann stattfinden, wenn du
-            selbst einen Datenaustausch über die vorgesehenen Funktionen
-            veranlasst oder die optionale Scryfall-Funktion verwendest.
-        </p>
+        <hr />
+        <h2 id="6-live-tracking-während-der-partie">6. Live-Tracking während der Partie</h2>
+        <p>Die Live-Ansicht ist für die Nutzung im Querformat ausgelegt, während das
+        Gerät flach auf dem Tisch liegt – jeder Teilnehmer bekommt eine zur eigenen
+        Tischseite ausgerichtete Kachel.</p>
+        <p><strong>Lebenspunkte ändern:</strong></p>
+        <ul>
+        <li>Ein einfaches <strong>Tippen</strong> auf „+“ oder „−“ ändert die Lebenspunkte um
+        jeweils 1.</li>
+        <li>Ein <strong>langes Drücken</strong> auf „+“ oder „−“ öffnet einen Dialog für größere
+        Änderungen mit vordefinierten Schnellwerten sowie einem Umschalter
+        zwischen Abzug und Zugewinn.</li>
+        </ul>
+        <p><strong>Weitere Elemente auf jeder Kachel:</strong></p>
+        <ul>
+        <li><strong>Commander-Schaden:</strong> öffnet einen Dialog, in dem sich der von jedem
+        gegnerischen Commander erlittene Schaden einzeln erfassen lässt (relevant,
+        da 21 Schadenspunkte eines einzelnen Commanders zum Ausscheiden führen).
+        Die laufende Gesamtsumme wird direkt auf der Kachel angezeigt.</li>
+        <li><strong>Problem-Markierung:</strong> ein Symbol, mit dem sich der aktuell als
+        „das Problem am Tisch“ wahrgenommene Teilnehmer markieren lässt (z. B. wer
+        gerade das größte Boardstate-Übergewicht hat). Es kann immer nur eine
+        Person gleichzeitig markiert sein; eine neue Markierung ersetzt automatisch
+        die vorherige. Scheidet ein markierter Teilnehmer aus (Lebenspunkte auf 0
+        oder weniger), bleibt diese Information für die Statistik dauerhaft
+        erhalten, auch wenn die Markierung danach auf einen anderen Teilnehmer
+        wechselt.</li>
+        <li><strong>Erzfeind-Komplott / Ongoing-Komplotte:</strong> nur im Erzfeind-Modus mit
+        aktiviertem Zusatzmodul sichtbar, siehe Kapitel 12.</li>
+        </ul>
+        <p><strong>Zu Beginn der Partie</strong> fragt ein Dialog die Anzahl der <strong>Mulligans</strong> jedes
+        Teilnehmers ab.</p>
+        <p><strong>Weitere Aktionen</strong> oben in der Live-Ansicht: „Rad drehen“ (Wheel of Chaos,
+        nur falls aktiviert), „Plane wechseln“ (Planechase, nur falls aktiviert) und
+        <strong>„Partie beenden“</strong>.</p>
+        <!-- BILDPLATZHALTER: Die komplette Live-Ansicht im Querformat mit mehreren Lebenspunkte-Kacheln rund um den Tisch. -->
 
-        <h2>10. Rechtsgrundlage</h2>
-        <p>
-            Soweit personenbezogene Daten verarbeitet werden, erfolgt die
-            Verarbeitung im Rahmen der Nutzung der App, insbesondere zur
-            Bereitstellung der von dir gewünschten Funktionen. Soweit eine
-            Verarbeitung auf deiner freiwilligen Entscheidung beruht, etwa
-            beim optionalen Abruf von Kartendaten oder beim aktiven
-            Datenaustausch, ist deine Nutzung der jeweiligen Funktion hierfür
-            maßgeblich.
-        </p>
+        <!-- BILDPLATZHALTER: Der Dialog "Lebenspunkte ändern" mit den Schnellwert-Buttons und dem Abzug/Zugewinn-Umschalter. -->
 
-        <h2>11. Speicherdauer und Löschung</h2>
-        <p>
-            Die lokal gespeicherten Daten verbleiben grundsätzlich auf deinem
-            Endgerät, bis du sie innerhalb der App löschst, die App bzw. ihre
-            Daten vom Endgerät entfernst oder sie anderweitig überschreibst
-            bzw. entfernst.
-        </p>
-        <p>
-            Für exportierte Dateien gilt: Du bestimmst selbst, wo du diese
-            Dateien speicherst und wann du sie löschst.
-        </p>
+        <!-- BILDPLATZHALTER: Der Commander-Schaden-Dialog für einen Teilnehmer. -->
 
-        <h2>12. Deine Rechte</h2>
-        <p>
-            Soweit die Datenschutz-Grundverordnung (DSGVO) auf die jeweilige
-            Verarbeitung anwendbar ist, hast du insbesondere das Recht auf
-            Auskunft über deine personenbezogenen Daten sowie – unter den
-            gesetzlichen Voraussetzungen – auf Berichtigung, Löschung,
-            Einschränkung der Verarbeitung und Widerspruch gegen bestimmte
-            Verarbeitungen. Soweit eine Verarbeitung auf einer Einwilligung
-            beruht, kannst du diese mit Wirkung für die Zukunft widerrufen.
-        </p>
-        <p>
-            Da die App die von dir angelegten Daten grundsätzlich lokal auf
-            deinem eigenen Endgerät speichert und keine zentrale
-            Benutzerdatenbank betrieben wird, liegen diese Daten regelmäßig
-            nur auf deinem Gerät bzw. in von dir selbst erstellten
-            Exportdateien vor.
-        </p>
+        <!-- BILDPLATZHALTER: Der Mulligan-Abfrage-Dialog zu Beginn der Partie. -->
 
-        <h2>13. Beschwerderecht bei einer Aufsichtsbehörde</h2>
-        <p>
-            Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde
-            über die Verarbeitung deiner personenbezogenen Daten zu
-            beschweren, wenn du der Auffassung bist, dass die Verarbeitung
-            gegen datenschutzrechtliche Vorschriften verstößt.
-        </p>
+        <hr />
+        <h2 id="7-partie-beenden-und-auswerten">7. Partie beenden und auswerten</h2>
+        <p>Über <strong>„Partie beenden“</strong> öffnet sich ein Dialog zur Ergebniserfassung:</p>
+        <ul>
+        <li><strong>Unentschieden</strong> als Kontrollkästchen,</li>
+        <li>ansonsten je Modus die <strong>Platzierung</strong> jedes Teilnehmers, bzw. bei
+        Two-Headed Giant das <strong>Sieger-Team</strong>, bei Erzfeind <strong>Erzfeind</strong> oder
+        <strong>Team</strong> als Sieger.</li>
+        </ul>
+        <p>Mit <strong>„Bestätigen“</strong> abschließen. Anschließend folgt die Abfrage der eigenen
+        <strong>Deck-Performance-Bewertung</strong> (1–5 Sterne) sowie – falls während der Partie
+        Lebenspunkte-Verläufe aufgezeichnet wurden – die Frage, ob dieser Verlauf
+        dauerhaft gespeichert werden soll (siehe die Verlaufsgrafik in Kapitel 8).</p>
+        <!-- BILDPLATZHALTER: Der "Partie beenden"-Dialog mit den Platzierungsfeldern. -->
 
-        <h2>14. Änderungen dieser Datenschutzerklärung</h2>
-        <p>
-            Diese Datenschutzerklärung kann angepasst werden, wenn sich die
-            Funktionen der App, die eingesetzten Dienste oder die rechtlichen
-            Anforderungen ändern. Die jeweils aktuelle Fassung wird unter
-            dieser Adresse veröffentlicht.
-        </p>
+        <!-- BILDPLATZHALTER: Der Abschluss-Dialog mit Deck-Performance-Bewertung (Sternebewertung) und der Frage zum Speichern des Lebenspunkte-Verlaufs. -->
+
+        <hr />
+        <h2 id="8-partien-historie-und-detailansicht">8. Partien-Historie und Detailansicht</h2>
+        <p>Der Tab <strong>Partien</strong> zeigt alle erfassten Partien in chronologischer
+        Reihenfolge, mit einem Filter nach Spielmodus oben auf dem Screen. Ein Tippen
+        auf eine Partie öffnet die <strong>Detailansicht</strong> mit:</p>
+        <ul>
+        <li>den Rahmendaten (Datum, Modus, Dauer, Gruppe),</li>
+        <li>allen Teilnehmern inklusive Platzierung/Ergebnis und gespieltem Deck,</li>
+        <li>bei Commander-Partien der Aufschlüsselung des erlittenen/ausgeteilten
+        Commander-Schadens,</li>
+        <li>und, sofern bei einer Live-Partie aufgezeichnet und gespeichert, der
+        <strong>Lebenspunkte-Verlaufsgrafik</strong> am Ende der Detailansicht – sie zeigt den
+        Verlauf aller Teilnehmer über die Dauer der Partie als Linienverlauf.</li>
+        </ul>
+        <!-- BILDPLATZHALTER: Die Partien-Historie mit mehreren Einträgen und dem Modus-Filter oben. -->
+
+        <!-- BILDPLATZHALTER: Die Partien-Detailansicht inklusive der Lebenspunkte-Verlaufsgrafik am unteren Ende. -->
+
+        <hr />
+        <h2 id="9-statistik">9. Statistik</h2>
+        <p>Der Tab <strong>Statistik</strong> bündelt alle Auswertungen zum eigenen Spielverlauf.
+        Oben lässt sich die Auswahl nach <strong>Spielmodus</strong>, <strong>Zeitraum</strong> und (bei
+        aktiviertem Mitspieler-Tracking) <strong>Gruppe</strong> einschränken – alle folgenden
+        Werte beziehen sich jeweils nur auf die aktuelle Auswahl.</p>
+        <p><strong>Kennzahlen-Reihe:</strong> Siegquote, Anzahl Partien, längste Siegserie.</p>
+        <p><strong>Ergebnisse:</strong> ein Ring-Diagramm mit der Aufteilung in Siege, Niederlagen
+        und Unentschieden, darunter zusätzlich die <strong>Unentschieden-Quote</strong> als eigene
+        Kennzahl (wie oft eine Partie in einem Unentschieden endet, unabhängig von
+        der allgemeinen Siegquote, die ein Unentschieden als Nicht-Niederlage
+        mitzählt).</p>
+        <p><strong>Weitere Detail-Kennzahlen</strong> (jeweils nur sichtbar, wenn Daten dafür
+        vorliegen): durchschnittliche Partiendauer, durchschnittliche Platzierung,
+        durchschnittliche Anzahl Mulligans samt Siegquote mit/ohne Mulligan,
+        durchschnittliche Deck-Performance-Bewertung, ausgeteilte/erlittene
+        Commander-Kills, <strong>First Blood</strong> (wie oft der erste ausgeteilte Schaden von
+        einem selbst kam, samt Siegquote-Vergleich), <strong>„Das Problem am Tisch“</strong> (wie
+        oft man selbst im Moment des Ausscheidens so markiert war, samt
+        Siegquote-Vergleich) sowie die <strong>Comeback-Quote</strong> (Siege trotz kritisch
+        niedriger Lebenspunkte).</p>
+        <p><strong>Vergleichs-Übersichten</strong> nach Farbidentität, Startposition, Partiendauer,
+        Deck-Archetyp, Deck-Bauart, Bracket, Commander-Partner und Deck-Eigentum
+        (eigenes vs. verliehenes Deck) zeigen jeweils die Siegquote für die
+        jeweilige Gruppe.</p>
+        <p><strong>Verleih-Auswertung:</strong> eine eigene Auswertung dazu, wie die eigene
+        Siegquote ausfällt, wenn andere Personen eigene Decks ausleihen und spielen.</p>
+        <!-- BILDPLATZHALTER: Der obere Teil des Statistik-Screens mit Filtern, Kennzahlen-Reihe und dem Ergebnisse-Ring (inkl. Unentschieden-Quote). -->
+
+        <!-- BILDPLATZHALTER: Der Detail-Bereich mit First Blood, Problem-Markierung und Comeback-Quote. -->
+
+        <!-- BILDPLATZHALTER: Eine der Vergleichs-Übersichten, z. B. Siegquote nach Farbidentität. -->
+
+        <hr />
+        <h2 id="10-erfolge">10. Erfolge</h2>
+        <p>Unter <strong>„Deine letzten Erfolge“</strong> auf dem Home-Tab (Link „Alle anzeigen“)
+        öffnet sich die vollständige <strong>Erfolge</strong>-Übersicht mit allen verfügbaren
+        Abzeichen, gruppiert nach Kategorien: Sieg-Serien, Partien gespielt, Siege,
+        Farbchampion, Wochentags-Serien und Spezial. Auch noch nicht erreichte
+        Abzeichen werden angezeigt (ausgegraut), damit erkennbar bleibt, was es noch
+        zu erreichen gibt.</p>
+        <!-- BILDPLATZHALTER: Die Erfolge-Übersicht mit freigeschalteten und ausgegrauten, noch nicht erreichten Abzeichen. -->
+
+        <hr />
+        <h2 id="11-mitspieler-und-gruppen">11. Mitspieler und Gruppen</h2>
+        <p>Dieser Bereich ist nur verfügbar, wenn der Schalter <strong>„Mitspieler tracken“</strong>
+        (Home-Tab → Weitere Optionen) aktiviert ist.</p>
+        <ul>
+        <li>Über <strong>„Gruppen verwalten“</strong> (Schnellzugriff auf dem Home-Tab) lassen sich
+        <strong>Spielgruppen</strong> anlegen – feste Spielrunden, denen sich Partien zuordnen
+        lassen, um z. B. in der Statistik nach Gruppe zu filtern.
+        Innerhalb einer Gruppe lassen sich über „Mitglied hinzufügen“ weitere
+        Mitspieler ergänzen (auch archivierte Spieler lassen sich dabei optional
+        einblenden).</li>
+        <li>Jeder Mitspieler hat eine eigene <strong>Spieler-Detailansicht</strong> mit dessen
+        Decks, erreichbar z. B. über die Gruppen-Detailansicht. Von dort lässt sich
+        ein Spielerprofil auch per <strong>QR-Code teilen</strong> oder umbenennen.</li>
+        </ul>
+        <!-- BILDPLATZHALTER: Die Gruppenübersicht mit mehreren angelegten Spielgruppen. -->
+
+        <!-- BILDPLATZHALTER: Die Gruppen-Detailansicht mit Mitgliederliste und dem Button "Mitglied hinzufügen". -->
+
+        <hr />
+        <h2 id="12-zusatzmodule-wheel-of-chaos-erzfeind-komplotte-planechase">12. Zusatzmodule: Wheel of Chaos, Erzfeind-Komplotte, Planechase</h2>
+        <p>Drei optionale Zusatzmodule lassen sich unabhängig voneinander im Home-Tab
+        unter „Weitere Optionen“ aktivieren. Ist ein Modul aktiv, erscheint im
+        Schnellzugriff ein passender Einrichtungs-Punkt sowie in der Live-Ansicht die
+        zugehörige Bedienmöglichkeit:</p>
+        <ul>
+        <li><strong>Wheel of Chaos:</strong> ein Glücksrad mit Zusatzaufgaben je Farbidentität, das
+        während der Live-Partie über den Button „Rad drehen“ gedreht werden kann.
+        Die Aufgaben je Farbe lassen sich unter „Wheel of Chaos verwalten“
+        bearbeiten.</li>
+        <li><strong>Erzfeind-Komplotte:</strong> zieht im Erzfeind-Modus während der Live-Partie
+        Komplott-Karten (laufend oder einmalig auflösbar). Unter „Erzfeind-Komplotte
+        einrichten“ lässt sich festlegen, aus welchen Sets gezogen wird (alle
+        verfügbaren Sets oder eine Auswahl bestimmter Sets).</li>
+        <li><strong>Planechase:</strong> zieht Plane-/Phenomenon-Karten, wahlweise für die gesamte
+        Partie aktivierbar (nur im Commander-Modus). Unter „Planechase einrichten“
+        lässt sich ebenso die Set-Auswahl festlegen; reichen die lokal
+        gespeicherten Karten für die Teilnehmerzahl nicht aus, erscheint beim
+        Partie-Setup ein entsprechender Hinweis.</li>
+        </ul>
+        <!-- BILDPLATZHALTER: Der Einrichtungsscreen eines der drei Module (z. B. Planechase) mit der Set-Auswahl. -->
+
+        <!-- BILDPLATZHALTER: Das Wheel of Chaos-Glücksrad während einer Live-Partie. -->
+
+        <hr />
+        <h2 id="13-daten-exportieren-importieren-und-sichern">13. Daten exportieren, importieren und sichern</h2>
+        <ul>
+        <li><strong>Daten exportieren</strong> (Schnellzugriff auf dem Home-Tab): Auswahl, welche
+        Kategorien exportiert werden sollen (Spieler, Decks, Gruppen, Partien),
+        anschließend entweder <strong>Teilen</strong> über das System-Teilen-Menü (z. B. per
+        Messenger oder Cloud-Speicher) oder <strong>direktes Speichern</strong> in einen frei
+        wählbaren Ordner auf dem Gerät.</li>
+        <li><strong>Daten importieren</strong> (Schnellzugriff auf dem Home-Tab): liest eine zuvor
+        exportierte Datei wieder ein, inklusive Abfrage bei möglichen Dubletten
+        (z. B. „Gleiche Person?“ bei einem bereits bekannten Spielernamen oder die
+        Nachfrage, ob ein bestehendes Deck aktualisiert werden soll).</li>
+        <li><strong>Einzelnes Deck oder Spielerprofil per QR-Code teilen:</strong> schneller als der
+        vollständige Export-Wizard, direkt über das QR-Symbol in der Deckliste bzw.
+        der Spieler-Detailansicht. Über <strong>„QR-Code scannen“</strong> im Import-Bereich
+        lässt sich ein so geteiltes Deck oder Spielerprofil wieder einlesen.</li>
+        <li><strong>Automatisches Backup</strong> (Home-Tab → Weitere Optionen, standardmäßig
+        aktiviert): schreibt beim Schließen der App eine Sicherungsdatei in einen
+        app-eigenen Ordner auf dem Gerät – ausschließlich lokal, ohne Cloud-Konto
+        oder Übertragung. Eine Wiederherstellung erfolgt über „Daten importieren“.
+        Zusätzlich lässt sich über <strong>„Jetzt sichern“</strong> jederzeit sofort eine
+        weitere Sicherungskopie anlegen, z. B. vor einem Gerätewechsel.</li>
+        </ul>
+        <!-- BILDPLATZHALTER: Der Export-Wizard mit der Kategorien-Auswahl (Spieler/Decks/Gruppen/Partien). -->
+
+        <!-- BILDPLATZHALTER: Der Import-Wizard mit einer erkannten Dublette und der zugehörigen Nachfrage. -->
+
+        <hr />
+        <h2 id="14-häufige-fragen">14. Häufige Fragen</h2>
+        <p class="faq"><strong>Ich habe während der Partie keine Lebenspunkte live mitgetrackt – kann ich
+        das Ergebnis trotzdem erfassen?</strong><br>
+        Ja, über „Manuell nachtragen“ beim Anlegen einer neuen Partie (siehe
+        Kapitel 5). Dabei lassen sich Ergebnis, Platzierungen und Mulligans
+        nachträglich eintragen, nur der minutengenaue Lebenspunkte-Verlauf entfällt.</p>
+        <p class="faq"><strong>Wie ändere ich meinen eigenen Spielernamen oder sehe meine Decks?</strong><br>
+        Über die Spieler-Detailansicht des eigenen Profils, erreichbar über den
+        Decks-Tab (dort lässt sich oben rechts auch umbenennen).</p>
+        <p class="faq"><strong>Ich spiele nur für mich allein, brauche ich Gruppen/Mitspieler?</strong><br>
+        Nein – ist „Mitspieler tracken“ deaktiviert (Standard bei der Auswahl „Nur
+        ich selbst“ in der Ersteinrichtung), entfallen alle entsprechenden
+        UI-Bereiche vollständig, ohne dass dadurch Funktionen fehlen, die sich auf
+        den eigenen Spielverlauf beziehen.</p>
+        <p class="faq"><strong>Wo liegen meine Daten?</strong><br>
+        Ausschließlich lokal auf dem eigenen Gerät. Für eine Übertragung auf ein
+        neues Gerät oder als zusätzliche Sicherung siehe Kapitel 13
+        (Export/Backup).</p>
+        <hr />
+        <p><em>Dieses Handbuch wird bei neuen Funktionen laufend ergänzt. Rückmeldungen
+        und Fragen gerne direkt an die Entwicklung weitergeben.</em></p>
 
         <footer>
             <p>
-                © 2026 Michaela Schick · TAP – Track &amp; Play
+                © 2026 Michaela Schick · TAP – Track &amp; Play ·
+                <a href="privacy/index.html">Datenschutzerklärung</a>
             </p>
         </footer>
     </article>

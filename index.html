@@ -82,6 +82,90 @@
         hr + h2, hr + nav h2 { margin-top: 1.5em; }
         hr + p { margin-top: 1.5em; }
 
+        .app-logo {
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .app-logo img {
+            width: 160px;
+            max-width: 50%;
+            height: auto;
+            border-radius: 22%;
+        }
+
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin: 2rem 0;
+        }
+
+        .screenshots a.zoom {
+            display: block;
+            width: 200px;
+            max-width: calc(50% - 12px);
+            cursor: zoom-in;
+        }
+
+        .screenshots img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: border-color 0.15s;
+        }
+
+        .screenshots a.zoom:hover img,
+        .screenshots a.zoom:focus-visible img {
+            border-color: var(--accent);
+        }
+
+        .screenshots figcaption {
+            flex-basis: 100%;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(4, 12, 16, 0.92);
+            cursor: zoom-out;
+        }
+
+        .lightbox[hidden] { display: none; }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            background: none;
+            border: 0;
+            color: var(--text);
+            font-size: 2.25rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        body.no-scroll { overflow: hidden; }
+
         ul, ol { padding-left: 1.4em; }
         li { margin: 0.35em 0; }
         li > ul, li > ol { margin-top: 0.35em; }
@@ -130,9 +214,11 @@
 
         <p>Dieses Handbuch erklärt die Verwendung von <strong>Track &amp; Play (TAP)</strong>, der App
         zum Erfassen und Auswerten eigener Magic: The Gathering-Partien. Es richtet
-        sich an Einsteiger ebenso wie an Nutzer, die bereits erfasste Partien
-        auswerten möchten.</p>
-        <!-- BILDPLATZHALTER: App-Icon und Startbildschirm im Überblick (als Aufmacherbild ganz oben im Handbuch). -->
+        sich sowohl an Einsteiger ebenso wie an Nutzer, die die App bereits verwenden, da hier auch neue Features vorgestellt werden.</p>
+        <figure class="app-logo">
+            <img src="assets/images/tap_icon.png" width="512" height="512"
+                 alt="App-Logo">
+        </figure>
 
         <hr />
         <nav class="toc" aria-label="Inhaltsverzeichnis">
@@ -170,7 +256,17 @@
         „Auch Mitspieler / Gruppen“ gewählt wurde.</li>
         <li>Mit <strong>„Fertig“</strong> abschließen – danach öffnet sich die Hauptansicht.</li>
         </ol>
-        <!-- BILDPLATZHALTER: Der Einrichtungs-Dialog mit der Auswahl "Nur ich selbst" / "Auch Mitspieler / Gruppen" sowie dem Namensfeld. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/welcome_01.png">
+                <img src="assets/images/welcome_01.png" width="864" height="1939"
+                     alt="Einrichtung der App" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/welcome_02.png">
+                <img src="assets/images/welcome_02.png" width="864" height="1939"
+                     alt="Einrichtung der App" loading="lazy">
+            </a>
+            <figcaption>Zum Vergrößern auf ein Bild klicken.</figcaption>
+        </figure>
 
         <hr />
         <h2 id="2-navigation--die-vier-hauptbereiche">2. Navigation – die vier Hauptbereiche</h2>
@@ -182,10 +278,12 @@
         <li><strong>Statistik</strong> – alle Auswertungen zum eigenen Spielverlauf</li>
         <li><strong>Partien</strong> – die Partien-Historie und der Einstieg für neue Partien</li>
         </ul>
-        <p>Jeder Tab bleibt beim Wechseln im Hintergrund erhalten (z. B. bleibt eine
-        Scroll-Position in der Partien-Historie erhalten, wenn man zwischendurch in
-        die Statistik wechselt und zurückkommt).</p>
-        <!-- BILDPLATZHALTER: Die untere Navigationsleiste mit allen vier Tabs, idealerweise mit dem aktiven Tab "Home" hervorgehoben. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/start.png">
+                <img src="assets/images/start.png" width="864" height="1939"
+                     alt="Startbildschirm" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="3-der-home-tab">3. Der Home-Tab</h2>
@@ -219,7 +317,16 @@
         Sicherung unabhängig vom automatischen Zeitpunkt.</li>
         </ul></li>
         </ul>
-        <!-- BILDPLATZHALTER: Der komplette Home-Tab von oben bis unten, inklusive aufgeklappter "Weitere Optionen"-Karte mit allen Schaltern. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/schnellzugriff.png">
+                <img src="assets/images/schnellzugriff.png" width="864" height="1939"
+                     alt="Schnellzugriff im Home-Tab" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/optionen.png">
+                <img src="assets/images/optionen.png" width="864" height="1939"
+                     alt="Weitere Optionen im Home-Tab" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="4-decks-verwalten">4. Decks verwalten</h2>
@@ -242,9 +349,16 @@
         der eigenen Track &amp; Play-Installation importieren kann), unabhängig vom
         umfassenderen Export-Wizard aus Kapitel 13.</li>
         </ul>
-        <!-- BILDPLATZHALTER: Die Deckliste mit mehreren Deck-Karten (Farbidentität, Commander, Bracket sichtbar). -->
-
-        <!-- BILDPLATZHALTER: Das Deck-Formular mit allen Eingabefeldern. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/decks.png">
+                <img src="assets/images/decks.png" width="864" height="1939"
+                     alt="Deckliste" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/neues%20Deck.png">
+                <img src="assets/images/neues%20Deck.png" width="864" height="1939"
+                     alt="Formular für ein neues Deck" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="5-eine-neue-partie-erfassen">5. Eine neue Partie erfassen</h2>
@@ -513,5 +627,50 @@
         </footer>
     </article>
 </main>
+<script>
+    // Bilder mit class="zoom" per Klick vergrößert anzeigen (ohne JavaScript öffnet der Link das Originalbild)
+    (function () {
+        var overlay = document.createElement("div");
+        overlay.className = "lightbox";
+        overlay.hidden = true;
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Bildansicht");
+        var big = document.createElement("img");
+        var closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.className = "lightbox-close";
+        closeBtn.setAttribute("aria-label", "Schließen");
+        closeBtn.textContent = "×";
+        overlay.appendChild(big);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+        var opener = null;
+
+        function close() {
+            overlay.hidden = true;
+            document.body.classList.remove("no-scroll");
+            big.removeAttribute("src");
+            if (opener) opener.focus();
+        }
+
+        document.addEventListener("click", function (e) {
+            var link = e.target.closest("a.zoom");
+            if (!link || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+            e.preventDefault();
+            opener = link;
+            var thumb = link.querySelector("img");
+            big.src = link.href;
+            big.alt = thumb ? thumb.alt : "";
+            overlay.hidden = false;
+            document.body.classList.add("no-scroll");
+            closeBtn.focus();
+        });
+        overlay.addEventListener("click", close);
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && !overlay.hidden) close();
+        });
+    })();
+</script>
 </body>
 </html>

@@ -109,6 +109,11 @@
             cursor: zoom-in;
         }
 
+        .screenshots a.zoom.landscape {
+            width: 440px;
+            max-width: 100%;
+        }
+
         .screenshots img {
             display: block;
             width: 100%;
@@ -129,6 +134,27 @@
             color: var(--muted);
             font-size: 0.9rem;
         }
+
+        .screenshots figcaption.legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px 20px;
+        }
+
+        .mark {
+            display: inline-block;
+            width: 0.9em;
+            height: 0.9em;
+            margin-right: 0.4em;
+            border: 2px solid;
+            border-radius: 2px;
+            vertical-align: -0.1em;
+        }
+
+        .mark-red { border-color: #e53935; }
+        .mark-blue { border-color: #29a8e0; }
+        .mark-green { border-color: #b5e61d; }
 
         .lightbox {
             position: fixed;
@@ -354,16 +380,22 @@
                 <img src="assets/images/decks.png" width="864" height="1939"
                      alt="Deckliste" loading="lazy">
             </a>
-            <a class="zoom" href="assets/images/neues%20Deck.png">
-                <img src="assets/images/neues%20Deck.png" width="864" height="1939"
+            <a class="zoom" href="assets/images/neues_deck.png">
+                <img src="assets/images/neues_deck.png" width="864" height="1939"
                      alt="Formular für ein neues Deck" loading="lazy">
             </a>
         </figure>
 
         <hr />
         <h2 id="5-eine-neue-partie-erfassen">5. Eine neue Partie erfassen</h2>
-        <p>Eine neue Partie wird über das <strong>„+“-Symbol</strong> im Partien-Tab gestartet. Dabei
-        gibt es zwei grundsätzlich unterschiedliche Vorgehensweisen, die sich oben
+        <p>Eine neue Partie wird über das <strong>„+“-Symbol</strong> im Partien-Tab gestartet.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/partien.png">
+                <img src="assets/images/partien.png" width="864" height="1939"
+                     alt="Partien-Tab mit dem „+“-Symbol für eine neue Partie" loading="lazy">
+            </a>
+        </figure>
+        <p> Dabei gibt es zwei grundsätzlich unterschiedliche Vorgehensweisen, die sich oben
         auf dem Bildschirm umschalten lassen:</p>
         <ul>
         <li><strong>Live erfassen:</strong> Die Partie wird während des Spielens direkt in der App
@@ -385,11 +417,57 @@
         für Gäste/Gegner ohne eigenes Profil; jedem bekannten Teilnehmer lässt
         sich zusätzlich sein gespieltes Deck zuordnen.</li>
         </ul>
+        <p><strong>Du selbst bist immer dabei:</strong> In jeder neuen Partie ist der eigene
+        Spieler (der „Ich-Spieler“ aus der Einrichtung) bereits als Teilnehmer eingetragen –
+        allerdings noch ohne Deck, worauf der Hinweis „Noch kein Deck ausgewählt“ aufmerksam
+        macht. Das gespielte Deck wählst du über das Deck-Symbol in deiner Zeile aus. Wer kein
+        bestimmtes Deck erfassen möchte, kann dort auch „Kein Deck angeben“ wählen.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/neue_partie_01.png">
+                <img src="assets/images/neue_partie_01.png" width="864" height="1939"
+                     alt="Neue Partie mit dem eigenen Spieler, noch ohne ausgewähltes Deck" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/neue_partie_02.png">
+                <img src="assets/images/neue_partie_02.png" width="864" height="1939"
+                     alt="Auswahl des eigenen Decks" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Bekannte und unbekannte Spieler:</strong></p>
+        <ul>
+        <li><strong>Bekannte Spieler</strong> sind Mitspieler, die in der App mit eigenem Profil
+        angelegt sind (siehe Kapitel 11). Ihnen lässt sich das gespielte Deck zuordnen, sie
+        können Spielgruppen angehören und haben eine eigene Spieler-Detailansicht mit ihren
+        Decks. Diese Option steht nur zur Verfügung, wenn „Mitspieler tracken“ aktiviert ist.</li>
+        <li><strong>Unbekannte Spieler</strong> sind Gäste oder Gegner, für die kein Profil
+        angelegt werden soll – etwa bei einer einmaligen Runde im Laden. Sie nehmen ganz normal
+        an der Partie teil (z. B. mit eigener Lebenspunkte-Kachel und Platzierung), werden aber
+        nicht als eigene Person gespeichert und über mehrere Partien hinweg mitverfolgt. Beim
+        Hinzufügen lassen sich ein Name (optional) und die Farbidentität ihres Decks angeben.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/neue_partie_03.png">
+                <img src="assets/images/neue_partie_03.png" width="864" height="1939"
+                     alt="Dialog „Unbekannten Spieler hinzufügen“" loading="lazy">
+            </a>
+        </figure>
+        <p>Ist „Mitspieler tracken“ deaktiviert, werden Gegner daher immer als unbekannte
+        Spieler hinzugefügt.</p>
+        <p><strong>Startposition:</strong> Über das Feld „Start“ mit „−“ und „+“ legst du für jeden
+        Teilnehmer fest, an welcher Position er in der Zugreihenfolge beginnt. Die Startposition
+        fließt in die Statistik ein (Vergleich nach Startposition, siehe Kapitel 9) und wird bei
+        der Live-Erfassung von „Automatisch anordnen“ für die Sitzverteilung genutzt.</p>
         <p><strong>Beim manuellen Nachtragen</strong> kommen zusätzlich hinzu: das Datum der Partie,
         optionale Notizen, eine Bewertung der eigenen Deck-Performance (1–5 Sterne),
         je Teilnehmer die erzielte Platzierung und die Anzahl eigener Mulligans,
         sowie die Festlegung von Unentschieden bzw. des Siegerteams (bei Two-Headed
         Giant) oder des Siegers (bei Erzfeind: Erzfeind oder Team).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/neue_partie_manuell.png">
+                <img src="assets/images/neue_partie_manuell.png" width="864" height="1939"
+                     alt="Neue Partie im Modus „Manuell nachtragen“ mit Datum, Notizen, Deck-Bewertung und Platzierung" loading="lazy">
+            </a>
+        </figure>
         <p><strong>Bei der Live-Erfassung</strong> werden stattdessen festgelegt: die
         Start-Lebenspunkte (bei Erzfeind getrennt für Erzfeind und Team), optional
         das Zusatzmodul Planechase für diese eine Partie, sowie die
@@ -400,23 +478,43 @@
         Sitzplätze passend zur Zugreihenfolge im Uhrzeigersinn.</p>
         <p>Abgeschlossen wird mit <strong>„Manuell speichern“</strong> bzw. <strong>„Live-Erfassung
         starten“</strong>.</p>
-        <!-- BILDPLATZHALTER: Der Neue-Partie-Screen mit der Umschaltung "Manuell nachtragen" / "Live erfassen" ganz oben. -->
-
-        <!-- BILDPLATZHALTER: Die Tisch-Anordnung mit mehreren Teilnehmern und dem Button "Automatisch anordnen". -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/neue_partie_04.png">
+                <img src="assets/images/neue_partie_04.png" width="864" height="1939"
+                     alt="Teilnehmerliste mit dem eigenen Spieler und drei unbekannten Spielern" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="6-live-tracking-während-der-partie">6. Live-Tracking während der Partie</h2>
         <p>Die Live-Ansicht ist für die Nutzung im Querformat ausgelegt, während das
         Gerät flach auf dem Tisch liegt – jeder Teilnehmer bekommt eine zur eigenen
         Tischseite ausgerichtete Kachel.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/live_screen.png">
+                <img src="assets/images/live_screen.png" width="1939" height="864"
+                     alt="Live-Ansicht im Querformat mit vier Lebenspunkte-Kacheln" loading="lazy">
+            </a>
+            <figcaption class="legend">
+                <span><span class="mark mark-red"></span>Rot: Problem-Markierung</span>
+                <span><span class="mark mark-blue"></span>Blau: Commander-Schaden</span>
+                <span><span class="mark mark-green"></span>Grün: Wheel of Chaos (sofern aktiviert)</span>
+            </figcaption>
+        </figure>
         <p><strong>Lebenspunkte ändern:</strong></p>
         <ul>
         <li>Ein einfaches <strong>Tippen</strong> auf „+“ oder „−“ ändert die Lebenspunkte um
         jeweils 1.</li>
         <li>Ein <strong>langes Drücken</strong> auf „+“ oder „−“ öffnet einen Dialog für größere
-        Änderungen mit vordefinierten Schnellwerten sowie einem Umschalter
+        Änderungen mit vordefinierten Schnellwerten (1, 5, 10, 20) sowie einem Umschalter
         zwischen Abzug und Zugewinn.</li>
         </ul>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/live_counter.png">
+                <img src="assets/images/live_counter.png" width="1939" height="864"
+                     alt="Dialog „Lebenspunkte ändern“ mit Schnellwerten und Abzug/Zugewinn-Umschalter" loading="lazy">
+            </a>
+        </figure>
         <p><strong>Weitere Elemente auf jeder Kachel:</strong></p>
         <ul>
         <li><strong>Commander-Schaden:</strong> öffnet einen Dialog, in dem sich der von jedem
@@ -434,54 +532,88 @@
         <li><strong>Erzfeind-Komplott / Ongoing-Komplotte:</strong> nur im Erzfeind-Modus mit
         aktiviertem Zusatzmodul sichtbar, siehe Kapitel 12.</li>
         </ul>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/commander_dmage.png">
+                <img src="assets/images/commander_dmage.png" width="1939" height="864"
+                     alt="Dialog „Commander-Schaden“ für einen Teilnehmer" loading="lazy">
+            </a>
+        </figure>
         <p><strong>Zu Beginn der Partie</strong> fragt ein Dialog die Anzahl der <strong>Mulligans</strong> jedes
         Teilnehmers ab.</p>
-        <p><strong>Weitere Aktionen</strong> oben in der Live-Ansicht: „Rad drehen“ (Wheel of Chaos,
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/mulligans.png">
+                <img src="assets/images/mulligans.png" width="864" height="1939"
+                     alt="Mulligan-Abfrage zu Beginn der Partie" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Weitere Aktionen</strong> unten in der Live-Ansicht: „Rad drehen“ (Wheel of Chaos,
         nur falls aktiviert), „Plane wechseln“ (Planechase, nur falls aktiviert) und
         <strong>„Partie beenden“</strong>.</p>
-        <!-- BILDPLATZHALTER: Die komplette Live-Ansicht im Querformat mit mehreren Lebenspunkte-Kacheln rund um den Tisch. -->
-
-        <!-- BILDPLATZHALTER: Der Dialog "Lebenspunkte ändern" mit den Schnellwert-Buttons und dem Abzug/Zugewinn-Umschalter. -->
-
-        <!-- BILDPLATZHALTER: Der Commander-Schaden-Dialog für einen Teilnehmer. -->
-
-        <!-- BILDPLATZHALTER: Der Mulligan-Abfrage-Dialog zu Beginn der Partie. -->
 
         <hr />
         <h2 id="7-partie-beenden-und-auswerten">7. Partie beenden und auswerten</h2>
         <p>Über <strong>„Partie beenden“</strong> öffnet sich ein Dialog zur Ergebniserfassung:</p>
         <ul>
         <li><strong>Unentschieden</strong> als Kontrollkästchen,</li>
+        <li>optional die Bewertung der eigenen <strong>Deck-Performance</strong> (1–5 Sterne),</li>
         <li>ansonsten je Modus die <strong>Platzierung</strong> jedes Teilnehmers, bzw. bei
         Two-Headed Giant das <strong>Sieger-Team</strong>, bei Erzfeind <strong>Erzfeind</strong> oder
         <strong>Team</strong> als Sieger.</li>
         </ul>
-        <p>Mit <strong>„Bestätigen“</strong> abschließen. Anschließend folgt die Abfrage der eigenen
-        <strong>Deck-Performance-Bewertung</strong> (1–5 Sterne) sowie – falls während der Partie
-        Lebenspunkte-Verläufe aufgezeichnet wurden – die Frage, ob dieser Verlauf
-        dauerhaft gespeichert werden soll (siehe die Verlaufsgrafik in Kapitel 8).</p>
-        <!-- BILDPLATZHALTER: Der "Partie beenden"-Dialog mit den Platzierungsfeldern. -->
-
-        <!-- BILDPLATZHALTER: Der Abschluss-Dialog mit Deck-Performance-Bewertung (Sternebewertung) und der Frage zum Speichern des Lebenspunkte-Verlaufs. -->
+        <p>Mit <strong>„Bestätigen“</strong> abschließen. Fehlen noch Platzierungen, weist der Dialog
+        darauf hin („Bitte vergib für jeden Teilnehmer eine Platzierung.“). Anschließend folgt –
+        falls während der Partie Lebenspunkte-Verläufe aufgezeichnet wurden – die Frage, ob
+        dieser Verlauf dauerhaft gespeichert werden soll (siehe die Verlaufsgrafik in Kapitel 8).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/abschluss.png">
+                <img src="assets/images/abschluss.png" width="864" height="1939"
+                     alt="Dialog „Partie beenden“ mit Deck-Bewertung und Platzierungen" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/abschluss_livepoints_hochkant.png">
+                <img src="assets/images/abschluss_livepoints_hochkant.png" width="864" height="1939"
+                     alt="Abfrage „Lebenspunkte-Verlauf speichern?“ nach dem Beenden der Partie" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="8-partien-historie-und-detailansicht">8. Partien-Historie und Detailansicht</h2>
         <p>Der Tab <strong>Partien</strong> zeigt alle erfassten Partien in chronologischer
-        Reihenfolge, mit einem Filter nach Spielmodus oben auf dem Screen. Ein Tippen
+        Reihenfolge, gruppiert nach Jahr und Monat – jeweils mit der Anzahl der Partien und
+        einzeln auf- und zuklappbar. Oben lassen sich die Partien über ein Suchfeld nach
+        Spieler, Commander oder Deck durchsuchen und nach Spielmodus filtern. Ein Tippen
         auf eine Partie öffnet die <strong>Detailansicht</strong> mit:</p>
         <ul>
         <li>den Rahmendaten (Datum, Modus, Dauer, Gruppe),</li>
-        <li>allen Teilnehmern inklusive Platzierung/Ergebnis und gespieltem Deck,</li>
-        <li>bei Commander-Partien der Aufschlüsselung des erlittenen/ausgeteilten
-        Commander-Schadens,</li>
+        <li>allen Teilnehmern inklusive Farbidentität, Startposition, Platzierung/Ergebnis und
+        gespieltem Deck; der Sieger ist mit einem Pokal markiert, wer den ersten Schaden
+        eingesteckt hat, mit „First Blood“,</li>
+        <li>bei Commander-Partien dem von jedem Teilnehmer erhaltenen Commander-Schaden,
+        aufgeschlüsselt nach Commander,</li>
         <li>und, sofern bei einer Live-Partie aufgezeichnet und gespeichert, der
         <strong>Lebenspunkte-Verlaufsgrafik</strong> am Ende der Detailansicht – sie zeigt den
         Verlauf aller Teilnehmer über die Dauer der Partie als Linienverlauf.</li>
         </ul>
-        <!-- BILDPLATZHALTER: Die Partien-Historie mit mehreren Einträgen und dem Modus-Filter oben. -->
+        <p>Über den <strong>Stift</strong> neben einem Teilnehmer lassen sich Angaben nachträglich
+        korrigieren, etwa ein falsch geschriebener Name oder ein beim Start falsch gewähltes Deck
+        bzw. eine falsche Farbidentität. Über das <strong>QR-Symbol</strong> oben rechts lässt sich
+        die Partie samt ihren Daten mit anderen teilen.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/partien_overview.png">
+                <img src="assets/images/partien_overview.png" width="864" height="1939"
+                     alt="Partien-Historie mit Suche, Modus-Filter und Monatsübersicht" loading="lazy">
+            </a>
+        </figure>
 
-        <!-- BILDPLATZHALTER: Die Partien-Detailansicht inklusive der Lebenspunkte-Verlaufsgrafik am unteren Ende. -->
-
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/partie_01.png">
+                <img src="assets/images/partie_01.png" width="864" height="1939"
+                     alt="Partien-Detailansicht mit Teilnehmern, Platzierungen und Commander-Schaden" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/partie_02.png">
+                <img src="assets/images/partie_02.png" width="864" height="1939"
+                     alt="Partien-Detailansicht mit Lebenspunkte-Verlaufsgrafik" loading="lazy">
+            </a>
+        </figure>
         <hr />
         <h2 id="9-statistik">9. Statistik</h2>
         <p>Der Tab <strong>Statistik</strong> bündelt alle Auswertungen zum eigenen Spielverlauf.
@@ -494,12 +626,17 @@
         Kennzahl (wie oft eine Partie in einem Unentschieden endet, unabhängig von
         der allgemeinen Siegquote, die ein Unentschieden als Nicht-Niederlage
         mitzählt).</p>
+        <p><strong>Score:</strong> ein persönlicher Wert, der aus den Partien der aktuellen Auswahl
+        in chronologischer Reihenfolge berechnet und mit einer Einstufung (z. B. „Grandios“)
+        angezeigt wird. Es handelt sich um einen rein persönlichen Wert, nicht um ein globales
+        Ranking.</p>
+        <p><strong>Aktivität nach Monat:</strong> ein Liniendiagramm, das zeigt, wie viele Partien
+        in den einzelnen Monaten gespielt wurden.</p>
         <p><strong>Weitere Detail-Kennzahlen</strong> (jeweils nur sichtbar, wenn Daten dafür
         vorliegen): durchschnittliche Partiendauer, durchschnittliche Platzierung,
         durchschnittliche Anzahl Mulligans samt Siegquote mit/ohne Mulligan,
         durchschnittliche Deck-Performance-Bewertung, ausgeteilte/erlittene
-        Commander-Kills, <strong>First Blood</strong> (wie oft der erste ausgeteilte Schaden von
-        einem selbst kam, samt Siegquote-Vergleich), <strong>„Das Problem am Tisch“</strong> (wie
+        Commander-Kills, <strong>First Blood</strong> (wie oft der erste ausgeteilte Schaden eingesteckt wurde, samt Siegquote-Vergleich), <strong>„Das Problem am Tisch“</strong> (wie
         oft man selbst im Moment des Ausscheidens so markiert war, samt
         Siegquote-Vergleich) sowie die <strong>Comeback-Quote</strong> (Siege trotz kritisch
         niedriger Lebenspunkte).</p>
@@ -509,11 +646,20 @@
         jeweilige Gruppe.</p>
         <p><strong>Verleih-Auswertung:</strong> eine eigene Auswertung dazu, wie die eigene
         Siegquote ausfällt, wenn andere Personen eigene Decks ausleihen und spielen.</p>
-        <!-- BILDPLATZHALTER: Der obere Teil des Statistik-Screens mit Filtern, Kennzahlen-Reihe und dem Ergebnisse-Ring (inkl. Unentschieden-Quote). -->
-
-        <!-- BILDPLATZHALTER: Der Detail-Bereich mit First Blood, Problem-Markierung und Comeback-Quote. -->
-
-        <!-- BILDPLATZHALTER: Eine der Vergleichs-Übersichten, z. B. Siegquote nach Farbidentität. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/statistic01.jpg">
+                <img src="assets/images/statistic01.jpg" width="945" height="1864"
+                     alt="Statistik mit Filtern, Kennzahlen und Ergebnis-Ring" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/statistic03.jpg">
+                <img src="assets/images/statistic03.jpg" width="945" height="1856"
+                     alt="Statistik: Score und Aktivität nach Monat" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/statistic02.jpg">
+                <img src="assets/images/statistic02.jpg" width="945" height="1858"
+                     alt="Statistik: Siegquote nach Startposition und Partiendauer" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="10-erfolge">10. Erfolge</h2>
@@ -523,7 +669,16 @@
         Farbchampion, Wochentags-Serien und Spezial. Auch noch nicht erreichte
         Abzeichen werden angezeigt (ausgegraut), damit erkennbar bleibt, was es noch
         zu erreichen gibt.</p>
-        <!-- BILDPLATZHALTER: Die Erfolge-Übersicht mit freigeschalteten und ausgegrauten, noch nicht erreichten Abzeichen. -->
+        <p>Oben zeigt die Übersicht, wie viele Erfolge insgesamt bereits freigeschaltet sind
+        (z. B. „21 / 89 Erfolge freigeschaltet“), und jede Kategorie zeigt ihren eigenen
+        Fortschritt (z. B. „Sieg-Serien (2/4)“). Unter freigeschalteten Abzeichen stehen das
+        Datum und – bei mehrfach erreichbaren Erfolgen – wie oft sie bereits erreicht wurden.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/erfolge.png">
+                <img src="assets/images/erfolge.png" width="864" height="1939"
+                     alt="Erfolge-Übersicht mit freigeschalteten und ausgegrauten Abzeichen" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="11-mitspieler-und-gruppen">11. Mitspieler und Gruppen</h2>
@@ -540,9 +695,16 @@
         Decks, erreichbar z. B. über die Gruppen-Detailansicht. Von dort lässt sich
         ein Spielerprofil auch per <strong>QR-Code teilen</strong> oder umbenennen.</li>
         </ul>
-        <!-- BILDPLATZHALTER: Die Gruppenübersicht mit mehreren angelegten Spielgruppen. -->
-
-        <!-- BILDPLATZHALTER: Die Gruppen-Detailansicht mit Mitgliederliste und dem Button "Mitglied hinzufügen". -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/groups_01.png">
+                <img src="assets/images/groups_01.png" width="864" height="1939"
+                     alt="Übersicht der Spielgruppen" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/groups_02.png">
+                <img src="assets/images/groups_02.png" width="864" height="1939"
+                     alt="Gruppendetails mit Mitgliederliste" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="12-zusatzmodule-wheel-of-chaos-erzfeind-komplotte-planechase">12. Zusatzmodule: Wheel of Chaos, Erzfeind-Komplotte, Planechase</h2>
@@ -565,36 +727,148 @@
         gespeicherten Karten für die Teilnehmerzahl nicht aus, erscheint beim
         Partie-Setup ein entsprechender Hinweis.</li>
         </ul>
-        <!-- BILDPLATZHALTER: Der Einrichtungsscreen eines der drei Module (z. B. Planechase) mit der Set-Auswahl. -->
+        <p><strong>Wheel of Chaos im Detail:</strong></p>
+        <p><strong>Einrichtung:</strong> Unter „Wheel of Chaos verwalten“ legst du fest, wie die fünf
+        Farben auf dem Rad verteilt sind (z. B. jede Farbe zweimal) und welche Aufgabe jeder Farbe
+        zugeordnet ist. Kommt eine Farbe mehrfach auf dem Rad vor, löst sie immer dieselbe Aufgabe
+        aus. Das Rad hat fünf Stufen, die sich jeweils über einen eigenen Reiter bearbeiten lassen;
+        Stufe 1 gilt zu Beginn jeder Partie. Die Aufgaben sind reiner Anzeigetext, den ihr selbst
+        am Tisch umsetzt. Die Idee zum Wheel of Chaos stammt von „herumkommandiert“
+        (<a href="https://www.twitch.tv/herumkommandiert" target="_blank" rel="noopener noreferrer">Twitch</a>
+        und <a href="https://www.youtube.com/c/herumkommandiert" target="_blank" rel="noopener noreferrer">YouTube</a>).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/woc01.png">
+                <img src="assets/images/woc01.png" width="864" height="1939"
+                     alt="Wheel of Chaos verwalten: Farbverteilung und Aufgaben je Farbe" loading="lazy">
+            </a>
+        </figure>
 
-        <!-- BILDPLATZHALTER: Das Wheel of Chaos-Glücksrad während einer Live-Partie. -->
+        <p><strong>Im Spiel:</strong> „Rad drehen“ in der Live-Ansicht öffnet das Glücksrad mit der
+        aktuellen Stufe. Nach dem Drehen erscheint die getroffene Farbe mit ihrer Aufgabe, die
+        sich mit „Weiter“ bestätigen lässt; über „Nochmal drehen“ wird das Rad erneut gedreht.
+        Die Stufe steigt automatisch, sobald so oft gedreht wurde, wie Spieler an der Partie
+        teilnehmen – also sobald theoretisch jeder einmal gedreht hat. Da die App nicht erkennen
+        kann, wer gerade dreht, zählt sie dafür nur die Anzahl der Drehungen.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/woc02.png">
+                <img src="assets/images/woc02.png" width="1939" height="864"
+                     alt="Wheel of Chaos-Glücksrad in der Live-Ansicht" loading="lazy">
+            </a>
+            <a class="zoom landscape" href="assets/images/woc03.png">
+                <img src="assets/images/woc03.png" width="1939" height="864"
+                     alt="Ergebnis des Glücksrads mit der Aufgabe der gezogenen Farbe" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Erzfeind-Komplotte im Detail:</strong></p>
+        <p><strong>Einrichtung:</strong> Unter „Erzfeind-Komplotte einrichten“ wählst du „Alle Sets“
+        oder „Bestimmte Sets“ und markierst die gewünschten Sets. Über „Jetzt synchronisieren“
+        werden die Komplott-Karten der gewählten Sets von Scryfall heruntergeladen und lokal
+        gespeichert – danach funktioniert das Ziehen im Live-Tracking auch ohne
+        Internetverbindung.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/arc01.png">
+                <img src="assets/images/arc01.png" width="864" height="1939"
+                     alt="Erzfeind-Komplotte einrichten: Set-Auswahl und Synchronisierung" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Komplott ziehen:</strong> In der Live-Ansicht hat die Kachel des Erzfeinds ein
+        zusätzliches, grünes Komplott-Symbol in der Ecke. Ein Antippen zieht eine Komplott-Karte
+        aus den gewählten Sets.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/arc02.png">
+                <img src="assets/images/arc02.png" width="1939" height="864"
+                     alt="Live-Ansicht im Erzfeind-Modus mit dem Komplott-Symbol auf der Kachel des Erzfeinds" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Anzeige:</strong> Die gezogene Karte wird groß und zur Tischseite des Erzfeinds
+        ausgerichtet angezeigt, daneben Name und Kartentyp (z. B. „Ongoing Scheme“). Mit
+        „Aufgelöst“ ist das Komplott erledigt und die Karte wird geschlossen. Laufende
+        Komplotte (Ongoing Schemes) lassen sich stattdessen über „Offen halten“ im Spiel
+        behalten.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/arc03.png">
+                <img src="assets/images/arc03.png" width="1939" height="864"
+                     alt="Gezogene Komplott-Karte mit den Buttons „Aufgelöst“ und „Offen halten“" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Ongoing-Komplotte:</strong> Offen gehaltene Komplotte erscheinen als weiteres
+        Symbol auf der Kachel des Erzfeinds; eine Zahl am Symbol zeigt, wie viele gerade offen
+        sind. Ein Antippen öffnet die Liste „Offene Ongoing-Komplotte“ mit allen aktuell
+        laufenden Komplotten.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/arc04.png">
+                <img src="assets/images/arc04.png" width="1939" height="864"
+                     alt="Kachel des Erzfeinds mit dem Symbol für offene Ongoing-Komplotte" loading="lazy">
+            </a>
+            <a class="zoom landscape" href="assets/images/arc05.png">
+                <img src="assets/images/arc05.png" width="1939" height="864"
+                     alt="Liste „Offene Ongoing-Komplotte“" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Planechase im Detail:</strong></p>
+        <p><strong>Einrichtung:</strong> Unter „Planechase einrichten“ wählst du „Alle Sets“ oder
+        „Bestimmte Sets“ und markierst die gewünschten Sets. Über „Jetzt synchronisieren“ werden
+        die Plane- und Phenomenon-Karten der gewählten Sets von Scryfall heruntergeladen und lokal
+        gespeichert.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/planechase01.png">
+                <img src="assets/images/planechase01.png" width="864" height="1939"
+                     alt="Planechase einrichten: Set-Auswahl und Synchronisierung" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Im Spiel:</strong> Planechase wird beim Anlegen einer Partie über den Schalter
+        „Plane-/Phenomenon-Karten für diese Partie nutzen“ aktiviert (siehe Kapitel 5). In der
+        Live-Ansicht liegt die aktuelle Karte dann in der Tischmitte; über „Plane wechseln“ wird
+        die nächste Karte aufgedeckt.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="assets/images/planechase02.png">
+                <img src="assets/images/planechase02.png" width="1939" height="864"
+                     alt="Planechase-Karte in der Live-Ansicht" loading="lazy">
+            </a>
+        </figure>
+
 
         <hr />
         <h2 id="13-daten-exportieren-importieren-und-sichern">13. Daten exportieren, importieren und sichern</h2>
         <ul>
         <li><strong>Daten exportieren</strong> (Schnellzugriff auf dem Home-Tab): Auswahl, welche
-        Kategorien exportiert werden sollen (Spieler, Decks, Gruppen, Partien),
-        anschließend entweder <strong>Teilen</strong> über das System-Teilen-Menü (z. B. per
-        Messenger oder Cloud-Speicher) oder <strong>direktes Speichern</strong> in einen frei
-        wählbaren Ordner auf dem Gerät.</li>
-        <li><strong>Daten importieren</strong> (Schnellzugriff auf dem Home-Tab): liest eine zuvor
-        exportierte Datei wieder ein, inklusive Abfrage bei möglichen Dubletten
+        Kategorien exportiert werden sollen (Spieler, Decks, Gruppen, Partien). Daraus entsteht
+        eine JSON-Datei, die sich anschließend entweder über <strong>„Als Datei teilen“</strong> mit
+        dem System-Teilen-Menü (z. B. per Messenger, E-Mail oder Cloud-Speicher) weitergeben oder
+        über <strong>„In Ordner speichern“</strong> in einem frei wählbaren Ordner auf dem Gerät
+        ablegen lässt.</li>
+        <li><strong>Daten importieren</strong> (Schnellzugriff auf dem Home-Tab): bietet drei Wege –
+        <strong>„Datei auswählen“</strong> für eine zuvor exportierte JSON-Datei,
+        <strong>„QR-Code scannen“</strong> für einen geteilten QR-Code und <strong>„Aus Backup
+        wiederherstellen“</strong> für die automatische Sicherung. Beim Einlesen fragt die App bei
+        möglichen Dubletten nach
         (z. B. „Gleiche Person?“ bei einem bereits bekannten Spielernamen oder die
         Nachfrage, ob ein bestehendes Deck aktualisiert werden soll).</li>
-        <li><strong>Einzelnes Deck oder Spielerprofil per QR-Code teilen:</strong> schneller als der
-        vollständige Export-Wizard, direkt über das QR-Symbol in der Deckliste bzw.
-        der Spieler-Detailansicht. Über <strong>„QR-Code scannen“</strong> im Import-Bereich
-        lässt sich ein so geteiltes Deck oder Spielerprofil wieder einlesen.</li>
+        <li><strong>Einzelnes Deck, Spielerprofil oder Partie per QR-Code teilen:</strong> schneller
+        als der vollständige Export-Wizard, direkt über das QR-Symbol in der Deckliste, der
+        Spieler-Detailansicht bzw. der Partien-Detailansicht. Über <strong>„QR-Code scannen“</strong>
+        im Import-Bereich lässt sich ein so geteiltes Deck, Spielerprofil oder eine so geteilte
+        Partie wieder einlesen.</li>
         <li><strong>Automatisches Backup</strong> (Home-Tab → Weitere Optionen, standardmäßig
         aktiviert): schreibt beim Schließen der App eine Sicherungsdatei in einen
         app-eigenen Ordner auf dem Gerät – ausschließlich lokal, ohne Cloud-Konto
-        oder Übertragung. Eine Wiederherstellung erfolgt über „Daten importieren“.
+        oder Übertragung. Eine Wiederherstellung erfolgt über „Daten importieren“ →
+        „Aus Backup wiederherstellen“.
         Zusätzlich lässt sich über <strong>„Jetzt sichern“</strong> jederzeit sofort eine
         weitere Sicherungskopie anlegen, z. B. vor einem Gerätewechsel.</li>
         </ul>
-        <!-- BILDPLATZHALTER: Der Export-Wizard mit der Kategorien-Auswahl (Spieler/Decks/Gruppen/Partien). -->
-
-        <!-- BILDPLATZHALTER: Der Import-Wizard mit einer erkannten Dublette und der zugehörigen Nachfrage. -->
+        <figure class="screenshots">
+            <a class="zoom" href="assets/images/export.png">
+                <img src="assets/images/export.png" width="864" height="1939"
+                     alt="Daten exportieren: Kategorien-Auswahl, Teilen oder in Ordner speichern" loading="lazy">
+            </a>
+            <a class="zoom" href="assets/images/import.png">
+                <img src="assets/images/import.png" width="864" height="1939"
+                     alt="Daten importieren: Datei auswählen, QR-Code scannen oder aus Backup wiederherstellen" loading="lazy">
+            </a>
+        </figure>
 
         <hr />
         <h2 id="14-häufige-fragen">14. Häufige Fragen</h2>

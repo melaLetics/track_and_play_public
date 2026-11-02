@@ -56,7 +56,11 @@
             padding: 32px;
         }
 
-        h1, h2 { line-height: 1.25; }
+        h1, h2, h3 { line-height: 1.25; }
+        h3 { margin-top: 1.5em; }
+        table.simple { border-collapse: collapse; margin: 0.5em 0 1em; }
+        table.simple th, table.simple td { padding: 0.3em 0.9em; text-align: left;
+            border-bottom: 1px solid rgba(128,128,128,0.35); }
         h1 { margin-top: 0; }
         h2 {
             margin-top: 2em;
@@ -318,14 +322,51 @@
         <li><strong>Begrüßung</strong> mit dem eigenen Spielernamen.</li>
         <li><strong>Elo-Score-Karte:</strong> ein Wert zwischen 0 und 100, der die grobe eigene
         „Spielstärke“ relativ zu einem durchschnittlichen Gegner einschätzt und
-        sich mit jeder gewerteten Partie anpasst.</li>
+        sich mit jeder abgeschlossenen Partie anpasst. Auf dem Home-Tab fließen immer
+        alle Partien ein – über alle Gruppen, Spielmodi und den gesamten Zeitraum
+        (wie der Wert berechnet wird, steht in <a href="#score-berechnung">Kapitel 9</a>).</li>
         <li><strong>Erinnerung an die letzte Partie:</strong> zeigt, wie lange die letzte erfasste
         Partie zurückliegt.</li>
         <li><strong>Zufalls-Deck-Karte:</strong> schlägt per Zufall eines der eigenen Decks vor,
-        praktisch für die Entscheidung „Was spiele ich heute?“.</li>
+        praktisch für die Entscheidung „Was spiele ich heute?“ (Details siehe
+        <a href="#zufalls-deck">unten</a>).</li>
         <li><strong>Letzte Erfolge:</strong> die zuletzt freigeschalteten Erfolgs-Abzeichen, mit
         Link zur vollständigen Erfolge-Übersicht (siehe Kapitel 10).</li>
         </ul>
+
+        <h3 id="zufalls-deck">Zufälliges Deck – „Welches Deck spiele ich heute?“</h3>
+        <p>Die Karte <strong>„Welches Deck spiele ich heute?“</strong> nimmt die Entscheidung
+        ab, welches Deck heute auf den Tisch kommt. Ein Tippen auf
+        <strong>„Zufälliges Deck“</strong> wählt eines der eigenen Decks aus. Das funktioniert in
+        zwei Schritten:</p>
+        <ol>
+        <li><strong>Filtern:</strong> Berücksichtigt werden ausschließlich die <em>eigenen</em>,
+        nicht archivierten Decks – Decks von Mitspielern und archivierte Decks kommen nie in
+        Frage. Über die Filter der Karte lässt sich
+        diese Auswahl weiter eingrenzen:
+        <ul>
+        <li><em>Bracket</em> (Power-Bracket des Decks),</li>
+        <li><em>Deck-Art</em>: Precon, Upgraded (aufgewertetes Precon) oder Homebrew,</li>
+        <li><em>Proxy-Status</em>: nur Original-Decks oder Decks mit Proxy-Karten.</li>
+        </ul>
+        Übrig bleiben nur die Decks, die zu allen gesetzten Kriterien passen. Passt kein
+        einziges Deck zu den gewählten Filtern, ist die Schaltfläche „Zufälliges Deck“
+        deaktiviert, bis die Filter so gelockert werden, dass wieder mindestens ein Deck
+        übrig bleibt.</li>
+        <li><strong>Würfeln:</strong> Aus diesen verbleibenden Decks wird eines rein zufällig
+        gezogen. Jedes Deck hat dabei <strong>exakt dieselbe Chance</strong> – es gibt keine
+        Gewichtung, etwa danach, wann ein Deck zuletzt gespielt wurde, wie hoch seine
+        Siegquote ist oder wie es bewertet wurde. Bei fünf passenden Decks liegt die
+        Chance für jedes also bei genau 20&nbsp;%.</li>
+        </ol>
+        <p>Das gezogene Deck wird unter dem Button mit seinem Namen angezeigt und bleibt dort
+        stehen, bis erneut gewürfelt wird. Wichtig: <strong>Ein Ändern der Filter würfelt nicht
+        automatisch neu.</strong> Der Filter legt nur fest, aus welchen Decks beim
+        <em>nächsten</em> Tippen auf „Zufälliges Deck“ gezogen wird – das zuvor gezogene Deck
+        bleibt bis dahin sichtbar, auch wenn es nicht mehr zum neuen Filter passt.</p>
+        <p>Da bei jedem Tippen unabhängig neu gezogen wird, kann dasselbe Deck auch mehrmals
+        hintereinander kommen. Wer ein anderes Deck möchte, würfelt einfach noch einmal.</p>
+
         <p>Darunter befinden sich zwei einklappbare Karten:</p>
         <ul>
         <li><strong>Schnellzugriff:</strong> Sprungmarken zu Funktionen ohne eigenen Tab –
@@ -626,10 +667,10 @@
         Kennzahl (wie oft eine Partie in einem Unentschieden endet, unabhängig von
         der allgemeinen Siegquote, die ein Unentschieden als Nicht-Niederlage
         mitzählt).</p>
-        <p><strong>Score:</strong> ein persönlicher Wert, der aus den Partien der aktuellen Auswahl
-        in chronologischer Reihenfolge berechnet und mit einer Einstufung (z. B. „Grandios“)
-        angezeigt wird. Es handelt sich um einen rein persönlichen Wert, nicht um ein globales
-        Ranking.</p>
+        <p><strong>Score:</strong> derselbe persönliche Wert wie auf dem Home-Tab (0–100, mit
+        Einstufung wie „Grandios“), hier aber nur aus den Partien der aktuellen Auswahl
+        berechnet. Die Berechnung selbst ist identisch, nur die einbezogenen Partien ändern
+        sich (Details siehe <a href="#score-berechnung">„So wird der Score berechnet“</a>).</p>
         <p><strong>Aktivität nach Monat:</strong> ein Liniendiagramm, das zeigt, wie viele Partien
         in den einzelnen Monaten gespielt wurden.</p>
         <p><strong>Weitere Detail-Kennzahlen</strong> (jeweils nur sichtbar, wenn Daten dafür
@@ -660,6 +701,82 @@
                      alt="Statistik: Siegquote nach Startposition und Partiendauer" loading="lazy">
             </a>
         </figure>
+
+        <h3 id="score-berechnung">So wird der Score berechnet</h3>
+        <p>Der Score ist an das aus dem Schach bekannte <strong>Elo-System</strong> angelehnt, aber
+        bewusst vereinfacht: Nur du selbst bekommst eine Wertung. Mitspieler haben keine
+        eigene Wertung – sie zählen nur indirekt über die Anzahl der Teilnehmer einer Partie.</p>
+
+        <p><strong>Welche Partien zählen?</strong> Nur <em>abgeschlossene</em> Partien. Laufende oder
+        nicht beendete Live-Partien fließen nie ein. Auf dem Home-Tab werden alle
+        abgeschlossenen Partien berücksichtigt, im Statistik-Tab nur die, die zur gewählten
+        Gruppe, zum Spielmodus und zum Zeitraum (Gesamt, 1 Jahr, 6 Monate, 30 Tage) passen.</p>
+
+        <p><strong>Schritt 1 – Ergebnis jeder Partie bewerten.</strong> Jede Partie bekommt einen
+        Ergebniswert zwischen 0 und 1:</p>
+        <ul>
+        <li><strong>Unentschieden:</strong> 0,5.</li>
+        <li><strong>Mit Platzierung</strong> (typisch bei Commander und cEDH): Der Platz wird auf die
+        Anzahl der Teilnehmer umgerechnet – der 1. Platz ergibt 1,0, der letzte Platz 0,0,
+        die Plätze dazwischen liegen gleichmäßig verteilt
+        (<em>(Teilnehmerzahl − Platz) ÷ (Teilnehmerzahl − 1)</em>). Ein 2. Platz zählt
+        dadurch in einer 6er-Runde (0,8) mehr als in einer 4er-Runde (0,67).</li>
+        <li><strong>Ohne Einzelplatzierung</strong> (z. B. Team-Modi wie Two-Headed Giant oder
+        Erzfeind, oder wenn keine Platzierung erfasst wurde): einfach Sieg = 1,0,
+        Niederlage = 0,0.</li>
+        </ul>
+
+        <p><strong>Schritt 2 – Wertung anpassen.</strong> Alle starten mit der Elo-Startwertung
+        1500. Die Partien werden in zeitlicher Reihenfolge durchgegangen. Da die echte Stärke
+        der Gegner nicht bekannt ist, wird immer ein <em>durchschnittlich starker Gegner</em>
+        angenommen, gegen den man ein Ergebnis von 0,5 erwarten würde. Pro Partie ändert
+        sich die Wertung dann um <em>32 × (Ergebnis − 0,5)</em>:</p>
+        <ul>
+        <li>Sieg bzw. 1. Platz: <strong>+16</strong></li>
+        <li>Unentschieden: <strong>±0</strong></li>
+        <li>Niederlage bzw. letzter Platz: <strong>−16</strong></li>
+        <li>2. Platz in einer 4er-Runde: <strong>etwa +5</strong>, in einer 6er-Runde:
+        <strong>etwa +10</strong></li>
+        </ul>
+        <p>Jede Partie zählt dabei gleich viel, egal wie lange sie zurückliegt. Wer sehen
+        möchte, wie es zuletzt lief, schränkt im Statistik-Tab den Zeitraum ein (z. B. auf
+        30 Tage).</p>
+
+        <p><strong>Schritt 3 – auf 0 bis 100 umrechnen.</strong> Die Wertung wird mit der üblichen
+        Elo-Formel in einen Wert von 0 bis 100 umgerechnet. Er lässt sich als
+        <strong>geschätzte Gewinnchance in Prozent gegen einen durchschnittlichen
+        Gegner</strong> lesen. Die Startwertung 1500 ergibt genau 50. Einige Beispiele:</p>
+        <table class="simple">
+        <thead><tr><th>Wertung</th><th>Score</th></tr></thead>
+        <tbody>
+        <tr><td>1300</td><td>24</td></tr>
+        <tr><td>1400</td><td>36</td></tr>
+        <tr><td>1500</td><td>50</td></tr>
+        <tr><td>1600</td><td>64</td></tr>
+        <tr><td>1700</td><td>76</td></tr>
+        <tr><td>1800</td><td>85</td></tr>
+        </tbody>
+        </table>
+        <p>Nach einem einzigen Sieg steht der Score also bei 52 (Wertung 1516). Je mehr
+        Partien gespielt sind, desto weiter kann er sich von 50 entfernen.</p>
+
+        <p><strong>Einstufung:</strong> Zusätzlich zur Zahl wird eine Einstufung angezeigt:</p>
+        <table class="simple">
+        <thead><tr><th>Score</th><th>Einstufung</th></tr></thead>
+        <tbody>
+        <tr><td>85 – 100</td><td>Grandios</td></tr>
+        <tr><td>70 – 84</td><td>Sehr stark</td></tr>
+        <tr><td>55 – 69</td><td>Stark</td></tr>
+        <tr><td>40 – 54</td><td>Durchschnitt</td></tr>
+        <tr><td>0 – 39</td><td>Ausbaufähig</td></tr>
+        </tbody>
+        </table>
+
+        <p><strong>Was nicht einfließt:</strong> Deck-Stärke und Bracket, wer konkret am Tisch saß,
+        Mulligans, Lebenspunkte-Verlauf, Commander-Kills sowie Erfolge. Der Score bewertet
+        ausschließlich das Ergebnis (Platzierung bzw. Sieg, Niederlage oder Unentschieden).
+        Weil nur du eine Wertung bekommst, ist er ein rein persönlicher Wert. Ein Vergleich
+        oder Ranking zwischen Spielern ist damit bewusst nicht vorgesehen.</p>
 
         <hr />
         <h2 id="10-erfolge">10. Erfolge</h2>
@@ -880,6 +997,14 @@
         <p class="faq"><strong>Wie ändere ich meinen eigenen Spielernamen oder sehe meine Decks?</strong><br>
         Über die Spieler-Detailansicht des eigenen Profils, erreichbar über den
         Decks-Tab (dort lässt sich oben rechts auch umbenennen).</p>
+        <p class="faq"><strong>Bevorzugt das zufällige Deck Decks, die ich länger nicht gespielt habe?</strong><br>
+        Nein. Alle eigenen Decks, die zu den gewählten Filtern passen, haben exakt
+        dieselbe Chance, gezogen zu werden – unabhängig von letzter Partie, Siegquote
+        oder Bewertung (siehe <a href="#zufalls-deck">Kapitel 3</a>).</p>
+        <p class="faq"><strong>Warum zeigt der Score auf dem Home-Tab einen anderen Wert als in der Statistik?</strong><br>
+        Der Home-Tab rechnet immer mit allen abgeschlossenen Partien, die Statistik nur mit
+        denen, die zu den gesetzten Filtern (Gruppe, Spielmodus, Zeitraum) passen. Die
+        Berechnung ist dieselbe (siehe <a href="#score-berechnung">Kapitel 9</a>).</p>
         <p class="faq"><strong>Ich spiele nur für mich allein, brauche ich Gruppen/Mitspieler?</strong><br>
         Nein – ist „Mitspieler tracken“ deaktiviert (Standard bei der Auswahl „Nur
         ich selbst“ in der Ersteinrichtung), entfallen alle entsprechenden

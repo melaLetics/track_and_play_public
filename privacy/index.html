@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung – TAP – Track &amp; Play</title>
+    <link rel="alternate" hreflang="de" href="https://melaletics.github.io/track_and_play_public/privacy/">
+    <link rel="alternate" hreflang="en" href="https://melaletics.github.io/track_and_play_public/en/privacy/">
+    <link rel="alternate" hreflang="x-default" href="https://melaletics.github.io/track_and_play_public/privacy/">
     <style>
         :root {
             color-scheme: light dark;
@@ -30,6 +33,59 @@
             max-width: 860px;
             margin: 0 auto;
             padding: 48px 24px 64px;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px 24px;
+            padding: 0 4px 20px;
+            font-size: 0.95rem;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: var(--muted);
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 20px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .lang-switch a,
+        .lang-switch [aria-current] {
+            padding: 6px 12px;
+            text-decoration: none;
+        }
+
+        .lang-switch a { color: var(--muted); }
+
+        .lang-switch a:hover,
+        .lang-switch a:focus-visible {
+            color: var(--text);
+            background: var(--border);
+        }
+
+        .lang-switch [aria-current] {
+            background: var(--accent);
+            color: var(--bg);
         }
 
         .card {
@@ -66,6 +122,13 @@
 </head>
 <body>
 <main>
+    <nav class="site-nav" aria-label="Seiten">
+        <a href="../index.html">Benutzerhandbuch</a>
+        <span class="lang-switch" role="group" aria-label="Sprache">
+            <span aria-current="true" lang="de" title="Deutsch">DE</span>
+            <a href="../en/privacy/index.html" hreflang="en" lang="en" title="English">EN</a>
+        </span>
+    </nav>
     <article class="card">
         <h1>Datenschutzerklärung</h1>
 
@@ -276,5 +339,16 @@
         </footer>
     </article>
 </main>
+<script>
+    // Sprachumschalter: den aktuellen Abschnitt (#Anker) beim Wechsel beibehalten
+    (function () {
+        var links = document.querySelectorAll(".lang-switch a[hreflang]");
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function () {
+                this.hash = location.hash;
+            });
+        }
+    })();
+</script>
 </body>
 </html>

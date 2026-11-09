@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User manual for TAP – Track &amp; Play, the app for tracking and analyzing your own Magic: The Gathering games.">
+    <title>User Manual – TAP – Track &amp; Play</title>
+    <link rel="alternate" hreflang="de" href="https://melaletics.github.io/track_and_play_public/">
+    <link rel="alternate" hreflang="en" href="https://melaletics.github.io/track_and_play_public/en/">
+    <link rel="alternate" hreflang="x-default" href="https://melaletics.github.io/track_and_play_public/">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #0b1e26;
+            --surface: #122a34;
+            --text: #f2f5f6;
+            --muted: #b7c4c9;
+            --accent: #e79a2f;
+            --border: #29434e;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Arial, sans-serif;
+            line-height: 1.65;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        main {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 24px 24px 64px;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px 24px;
+            padding: 0 4px 20px;
+            font-size: 0.95rem;
+        }
+
+        .site-nav .brand {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 20px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .lang-switch a,
+        .lang-switch [aria-current] {
+            padding: 6px 12px;
+            text-decoration: none;
+        }
+
+        .lang-switch a { color: var(--muted); }
+
+        .lang-switch a:hover,
+        .lang-switch a:focus-visible {
+            color: var(--text);
+            background: var(--border);
+        }
+
+        .lang-switch [aria-current] {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        h1, h2, h3 { line-height: 1.25; }
+        h3 { margin-top: 1.5em; }
+        table.simple { border-collapse: collapse; margin: 0.5em 0 1em; }
+        table.simple th, table.simple td { padding: 0.3em 0.9em; text-align: left;
+            border-bottom: 1px solid rgba(128,128,128,0.35); }
+        h1 { margin-top: 0; }
+        h2 {
+            margin-top: 2em;
+            color: var(--accent);
+            scroll-margin-top: 16px;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        .meta {
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0 0;
+        }
+
+        hr + h2, hr + nav h2 { margin-top: 1.5em; }
+        hr + p { margin-top: 1.5em; }
+
+        .app-logo {
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .app-logo img {
+            width: 160px;
+            max-width: 50%;
+            height: auto;
+            border-radius: 22%;
+        }
+
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin: 2rem 0;
+        }
+
+        .screenshots a.zoom {
+            display: block;
+            width: 200px;
+            max-width: calc(50% - 12px);
+            cursor: zoom-in;
+        }
+
+        .screenshots a.zoom.landscape {
+            width: 440px;
+            max-width: 100%;
+        }
+
+        .screenshots img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: border-color 0.15s;
+        }
+
+        .screenshots a.zoom:hover img,
+        .screenshots a.zoom:focus-visible img {
+            border-color: var(--accent);
+        }
+
+        .screenshots figcaption {
+            flex-basis: 100%;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .screenshots figcaption.legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px 20px;
+        }
+
+        .mark {
+            display: inline-block;
+            width: 0.9em;
+            height: 0.9em;
+            margin-right: 0.4em;
+            border: 2px solid;
+            border-radius: 2px;
+            vertical-align: -0.1em;
+        }
+
+        .mark-red { border-color: #e53935; }
+        .mark-blue { border-color: #29a8e0; }
+        .mark-green { border-color: #b5e61d; }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(4, 12, 16, 0.92);
+            cursor: zoom-out;
+        }
+
+        .lightbox[hidden] { display: none; }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            background: none;
+            border: 0;
+            color: var(--text);
+            font-size: 2.25rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        body.no-scroll { overflow: hidden; }
+
+        ul, ol { padding-left: 1.4em; }
+        li { margin: 0.35em 0; }
+        li > ul, li > ol { margin-top: 0.35em; }
+
+        .toc h2 { margin-top: 1.5em; }
+        .toc ol {
+            columns: 2;
+            column-gap: 40px;
+        }
+        .toc li {
+            margin: 0 0 0.4em;
+            break-inside: avoid;
+        }
+        .toc a { text-decoration: none; }
+        .toc a:hover, .toc a:focus { text-decoration: underline; }
+
+        .faq { margin-top: 1.5em; }
+
+        footer {
+            margin-top: 3rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 600px) {
+            main { padding: 16px 14px 40px; }
+            .card { padding: 22px 18px; }
+            .toc ol { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <nav class="site-nav" aria-label="Pages">
+        <span class="brand">TAP – Track &amp; Play</span>
+        <span class="nav-links">
+            <a href="privacy/index.html">Privacy Policy</a>
+            <span class="lang-switch" role="group" aria-label="Language">
+                <a href="../index.html" hreflang="de" lang="de" title="Deutsch">DE</a>
+                <span aria-current="true" lang="en" title="English">EN</span>
+            </span>
+        </span>
+    </nav>
+
+    <article class="card">
+        <h1>Track &amp; Play – User Manual</h1>
+
+        <p class="meta">
+            for the app “TAP – Track &amp; Play”<br>
+            Last updated: October 2026
+        </p>
+
+        <p>This manual explains how to use <strong>Track &amp; Play (TAP)</strong>, the app for
+        tracking and analyzing your own Magic: The Gathering games. It is aimed at
+        newcomers as well as at people who already use the app, since it also introduces new features.</p>
+        <figure class="app-logo">
+            <img src="../assets/images/tap_icon.png" width="512" height="512"
+                 alt="App logo">
+        </figure>
+
+        <hr />
+        <nav class="toc" aria-label="Table of contents">
+        <h2 id="inhaltsverzeichnis">Table of Contents</h2>
+        <ol>
+        <li><a href="#1-erste-schritte">Getting Started</a></li>
+        <li><a href="#2-navigation--die-vier-hauptbereiche">Navigation – the four main sections</a></li>
+        <li><a href="#3-der-home-tab">The Home Tab</a></li>
+        <li><a href="#4-decks-verwalten">Managing Decks</a></li>
+        <li><a href="#5-eine-neue-partie-erfassen">Recording a New Game</a></li>
+        <li><a href="#6-live-tracking-während-der-partie">Live Tracking During the Game</a></li>
+        <li><a href="#7-partie-beenden-und-auswerten">Ending and Scoring a Game</a></li>
+        <li><a href="#8-partien-historie-und-detailansicht">Game History and Detail View</a></li>
+        <li><a href="#9-statistik">Statistics</a></li>
+        <li><a href="#10-erfolge">Achievements</a></li>
+        <li><a href="#11-mitspieler-und-gruppen">Players and Groups</a></li>
+        <li><a href="#12-zusatzmodule-wheel-of-chaos-erzfeind-komplotte-planechase">Add-on Modules: Wheel of Chaos, Archenemy Schemes, Planechase</a></li>
+        <li><a href="#13-daten-exportieren-importieren-und-sichern">Exporting, Importing and Backing Up Data</a></li>
+        <li><a href="#14-häufige-fragen">FAQ</a></li>
+        </ol>
+        </nav>
+        <hr />
+        <h2 id="1-erste-schritte">1. Getting Started</h2>
+        <p>The very first time you launch Track &amp; Play, a short setup dialog appears:</p>
+        <ol>
+        <li><strong>Choose the scope:</strong> “Just me” (the simplest option – only your own
+        games are tracked) or “Players / groups too” (you can additionally create
+        and follow other players and playgroups). You can change this setting at any
+        time later with the “Track players” switch on the Home tab.</li>
+        <li><strong>Enter your name:</strong> Under “What should we call you?” you set your own
+        player name. From then on, this player is the “me player” that all statistics
+        refer to.</li>
+        <li><strong>Optionally create a first playgroup</strong>, if you chose
+        “Players / groups too” in the first step.</li>
+        <li>Finish with <strong>“Done”</strong> – the main view opens afterwards.</li>
+        </ol>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/welcome_01.png">
+                <img src="../assets/images/welcome_01.png" width="864" height="1939"
+                     alt="App setup" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/welcome_02.png">
+                <img src="../assets/images/welcome_02.png" width="864" height="1939"
+                     alt="App setup" loading="lazy">
+            </a>
+            <figcaption>Click an image to enlarge it.</figcaption>
+        </figure>
+
+        <hr />
+        <h2 id="2-navigation--die-vier-hauptbereiche">2. Navigation – the four main sections</h2>
+        <p>After setup, the main view opens with a navigation bar at the bottom of the
+        screen containing four sections (tabs):</p>
+        <ul>
+        <li><strong>Home</strong> – greeting, Elo score, reminders and shortcuts</li>
+        <li><strong>Decks</strong> – your own deck collection</li>
+        <li><strong>Statistics</strong> – all analyses of your games</li>
+        <li><strong>Games</strong> – the game history and the starting point for new games</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/start.png">
+                <img src="../assets/images/start.png" width="864" height="1939"
+                     alt="Start screen" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="3-der-home-tab">3. The Home Tab</h2>
+        <p>The Home tab is the central starting point and shows at a glance:</p>
+        <ul>
+        <li>A <strong>greeting</strong> with your player name.</li>
+        <li><strong>Elo score card:</strong> a value between 0 and 100 that gives a rough estimate of
+        your own “playing strength” relative to an average opponent and is updated
+        with every completed game. On the Home tab, all games are always included –
+        across all groups, game modes and the entire time span
+        (how the value is calculated is explained in <a href="#score-berechnung">chapter 9</a>).</li>
+        <li><strong>Last game reminder:</strong> shows how long ago your last recorded game
+        was.</li>
+        <li><strong>Random deck card:</strong> randomly suggests one of your own decks –
+        handy for deciding “What do I play today?” (see details
+        <a href="#zufalls-deck">below</a>).</li>
+        <li><strong>Recent achievements:</strong> the most recently unlocked achievement badges, with a
+        link to the full achievements overview (see chapter 10).</li>
+        </ul>
+
+        <h3 id="zufalls-deck">Random deck – “Which deck do I play today?”</h3>
+        <p>The <strong>“Which deck do I play today?”</strong> card takes the decision of which
+        deck hits the table today off your hands. Tapping
+        <strong>“Random deck”</strong> picks one of your own decks. This works in
+        two steps:</p>
+        <ol>
+        <li><strong>Filter:</strong> Only your <em>own</em>, non-archived decks are considered –
+        decks belonging to other players and archived decks are never picked. The card’s
+        filters let you narrow this selection down further:
+        <ul>
+        <li><em>Bracket</em> (the deck’s power bracket),</li>
+        <li><em>Deck type</em>: Precon, Upgraded (an upgraded precon) or Homebrew,</li>
+        <li><em>Proxy status</em>: original decks only or decks with proxy cards.</li>
+        </ul>
+        Only decks that match all the selected criteria remain. If not a single deck
+        matches the selected filters, the “Random deck” button is disabled until the
+        filters are loosened enough that at least one deck remains.</li>
+        <li><strong>Roll:</strong> One of the remaining decks is drawn purely at random.
+        Every deck has <strong>exactly the same chance</strong> – there is no weighting,
+        for example by when a deck was last played, how high its win rate is or how it
+        was rated. With five matching decks, each one therefore has a chance of exactly
+        20&nbsp;%.</li>
+        </ol>
+        <p>The drawn deck is shown by name below the button and stays there until you roll
+        again. Important: <strong>changing the filters does not automatically re-roll.</strong>
+        The filter only determines which decks the <em>next</em> tap on “Random deck” draws
+        from – the previously drawn deck stays visible until then, even if it no longer
+        matches the new filter.</p>
+        <p>Since every tap draws independently, the same deck can come up several times
+        in a row. If you want a different deck, simply roll again.</p>
+
+        <p>Below that are two collapsible cards:</p>
+        <ul>
+        <li><strong>Shortcuts:</strong> quick links to features without their own tab –
+        group management, setting up Wheel of Chaos, Archenemy schemes and Planechase
+        (each only visible when the corresponding module is enabled, see chapter 12),
+        as well as data export/import (see chapter 13).</li>
+        <li><strong>More options:</strong> global switches for
+        <ul>
+        <li><em>Track players</em> (see chapter 11),</li>
+        <li><em>Wheel of Chaos</em>, <em>Archenemy schemes</em> and <em>Planechase</em> (see chapter 12),</li>
+        <li><em>Automatic backup</em> (writes a backup file to an app-specific folder on
+        the device when the app is closed – no cloud, no account, see chapter 13),</li>
+        <li>and the <em>“Back up now”</em> button for an immediate, additional backup
+        independent of the automatic one.</li>
+        </ul></li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/schnellzugriff.png">
+                <img src="../assets/images/schnellzugriff.png" width="864" height="1939"
+                     alt="Shortcuts on the Home tab" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/optionen.png">
+                <img src="../assets/images/optionen.png" width="864" height="1939"
+                     alt="More options on the Home tab" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="4-decks-verwalten">4. Managing Decks</h2>
+        <p>The <strong>Decks</strong> tab is where you manage your own decks:</p>
+        <ul>
+        <li>The <strong>“+” icon</strong> at the bottom right creates a new deck.</li>
+        <li>The deck form records: deck name, commander (optional) and
+        partner commander (optional), color identity, build type, up to three
+        archetypes, a power bracket, whether the deck contains proxy cards, whether it
+        is tournament legal, an optional online link to the deck (e.g. Moxfield/
+        Archidekt) and free-form subthemes (e.g. “Ninjutsu, Clones”).</li>
+        <li>The <strong>magnifying glass icon</strong> lets you search the deck list by deck name or
+        commander, the sort icon orders it by name or performance metrics.</li>
+        <li>Decks can be <strong>archived</strong> instead of deleted (e.g. when a deck is no
+        longer played) – archived decks can optionally be shown again via the
+        archive icon.</li>
+        <li>The <strong>QR icon</strong> on a deck lets you share that single deck with another
+        person via QR code (e.g. so someone can import the deck into their own
+        Track &amp; Play installation), independently of the more comprehensive export
+        wizard described in chapter 13.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/decks.png">
+                <img src="../assets/images/decks.png" width="864" height="1939"
+                     alt="Deck list" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/neues_deck.png">
+                <img src="../assets/images/neues_deck.png" width="864" height="1939"
+                     alt="New deck form" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="5-eine-neue-partie-erfassen">5. Recording a New Game</h2>
+        <p>A new game is started with the <strong>“+” icon</strong> on the Games tab.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/partien.png">
+                <img src="../assets/images/partien.png" width="864" height="1939"
+                     alt="Games tab with the “+” icon for a new game" loading="lazy">
+            </a>
+        </figure>
+        <p>There are two fundamentally different ways to do this, which you can switch between
+        at the top of the screen:</p>
+        <ul>
+        <li><strong>Track live:</strong> The game is tracked live in the app while you play
+        (life totals, commander damage, etc. – see chapter 6).
+        Recommended when the device is within reach on the table during the
+        game.</li>
+        <li><strong>Add manually:</strong> A game that has already been played is recorded
+        afterwards, including result, placements and mulligans – without
+        live tracking of life totals. Handy if you only pick up the app after
+        the game.</li>
+        </ul>
+        <p>Regardless of the mode, you first set:</p>
+        <ul>
+        <li>the <strong>game mode</strong> (e.g. Commander, cEDH, Two-Headed Giant, Archenemy),</li>
+        <li>optionally a <strong>playgroup</strong> (only visible when “Track players”
+        is enabled),</li>
+        <li>the <strong>participants</strong> – via “Add known player” (only with
+        player tracking enabled) or “Add unknown player” for guests/opponents
+        without their own profile; each known participant can additionally be
+        assigned the deck they played.</li>
+        </ul>
+        <p><strong>You are always included:</strong> In every new game, your own player
+        (the “me player” from setup) is already entered as a participant –
+        but without a deck yet, which the hint “No deck selected yet” points
+        out. You pick the deck you played via the deck icon in your row. If you don’t
+        want to record a specific deck, you can also choose “Don’t specify a deck” there.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/neue_partie_01.png">
+                <img src="../assets/images/neue_partie_01.png" width="864" height="1939"
+                     alt="New game with your own player, no deck selected yet" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/neue_partie_02.png">
+                <img src="../assets/images/neue_partie_02.png" width="864" height="1939"
+                     alt="Selecting your own deck" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Known and unknown players:</strong></p>
+        <ul>
+        <li><strong>Known players</strong> are players who have their own profile in the
+        app (see chapter 11). They can be assigned the deck they played, can belong to
+        playgroups and have their own player detail view with their decks. This option
+        is only available when “Track players” is enabled.</li>
+        <li><strong>Unknown players</strong> are guests or opponents for whom you don’t want to
+        create a profile – for example in a one-off game at your local game store. They take
+        part in the game as normal (e.g. with their own life tile and placement), but are
+        not saved as a person and not followed across multiple games. When adding
+        them, you can enter a name (optional) and the color identity of their deck.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/neue_partie_03.png">
+                <img src="../assets/images/neue_partie_03.png" width="864" height="1939"
+                     alt="“Add unknown player” dialog" loading="lazy">
+            </a>
+        </figure>
+        <p>If “Track players” is disabled, opponents are therefore always added as unknown
+        players.</p>
+        <p><strong>Turn order:</strong> Using the “Start” field with “−” and “+”, you set for each
+        participant at which position in the turn order they start. The starting position
+        is used in the statistics (comparison by turn order, see chapter 9) and, when tracking
+        live, by “Arrange automatically” for the seating layout.</p>
+        <p><strong>When adding a game manually</strong>, the following are added: the date of the game,
+        optional notes, a rating of your own deck’s performance (1–5 stars),
+        each participant’s placement and number of mulligans,
+        as well as marking a draw or the winning team (in Two-Headed
+        Giant) or the winner (in Archenemy: the archenemy or the team).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/neue_partie_manuell.png">
+                <img src="../assets/images/neue_partie_manuell.png" width="864" height="1939"
+                     alt="New game in “Add manually” mode with date, notes, deck rating and placement" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>When tracking live</strong>, you set instead: the
+        starting life totals (in Archenemy separately for the archenemy and the team), optionally
+        the Planechase add-on module for this one game, and the
+        <strong>table layout</strong> – it determines on which side of the table and in which
+        orientation each participant’s life tile is shown later
+        when the device lies flat on the table. Tapping a name changes
+        the assigned side; the “Arrange automatically” button distributes the
+        seats clockwise according to the turn order.</p>
+        <p>Finish with <strong>“Save manually”</strong> or <strong>“Start live
+        tracking”</strong>.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/neue_partie_04.png">
+                <img src="../assets/images/neue_partie_04.png" width="864" height="1939"
+                     alt="Participant list with your own player and three unknown players" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="6-live-tracking-während-der-partie">6. Live Tracking During the Game</h2>
+        <p>The live view is designed for landscape use while the
+        device lies flat on the table – each participant gets a tile facing their
+        side of the table.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/live_screen.png">
+                <img src="../assets/images/live_screen.png" width="1939" height="864"
+                     alt="Live view in landscape with four life tiles" loading="lazy">
+            </a>
+            <figcaption class="legend">
+                <span><span class="mark mark-red"></span>Red: problem marker</span>
+                <span><span class="mark mark-blue"></span>Blue: commander damage</span>
+                <span><span class="mark mark-green"></span>Green: Wheel of Chaos (if enabled)</span>
+            </figcaption>
+        </figure>
+        <p><strong>Changing life totals:</strong></p>
+        <ul>
+        <li>A simple <strong>tap</strong> on “+” or “−” changes the life total by
+        1.</li>
+        <li>A <strong>long press</strong> on “+” or “−” opens a dialog for larger
+        changes with predefined quick values (1, 5, 10, 20) and a toggle
+        between loss and gain.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/live_counter.png">
+                <img src="../assets/images/live_counter.png" width="1939" height="864"
+                     alt="“Change life” dialog with quick values and loss/gain toggle" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Other elements on each tile:</strong></p>
+        <ul>
+        <li><strong>Commander damage:</strong> opens a dialog in which the damage taken from each
+        opposing commander can be recorded individually (relevant because
+        21 damage from a single commander eliminates a player).
+        The running total is shown directly on the tile.</li>
+        <li><strong>Problem marker:</strong> an icon you can use to mark the participant currently
+        perceived as “the problem at the table” (e.g. whoever has the most
+        dominant board state right now). Only one person can be marked at a
+        time; a new mark automatically replaces the previous one. If a marked
+        participant is eliminated (life at 0 or less), this information is
+        permanently kept for the statistics, even if the mark then moves on to
+        another participant.</li>
+        <li><strong>Archenemy scheme / ongoing schemes:</strong> only visible in Archenemy mode with
+        the add-on module enabled, see chapter 12.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/commander_dmage.png">
+                <img src="../assets/images/commander_dmage.png" width="1939" height="864"
+                     alt="“Commander damage” dialog for one participant" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>At the start of the game</strong>, a dialog asks for each participant’s number of
+        <strong>mulligans</strong>.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/mulligans.png">
+                <img src="../assets/images/mulligans.png" width="864" height="1939"
+                     alt="Mulligan prompt at the start of the game" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Further actions</strong> at the bottom of the live view: “Spin wheel” (Wheel of Chaos,
+        only if enabled), “Change plane” (Planechase, only if enabled) and
+        <strong>“End game”</strong>.</p>
+
+        <hr />
+        <h2 id="7-partie-beenden-und-auswerten">7. Ending and Scoring a Game</h2>
+        <p><strong>“End game”</strong> opens a dialog for recording the result:</p>
+        <ul>
+        <li><strong>Draw</strong> as a checkbox,</li>
+        <li>optionally a rating of your own <strong>deck performance</strong> (1–5 stars),</li>
+        <li>otherwise, depending on the mode, the <strong>placement</strong> of each participant, or in
+        Two-Headed Giant the <strong>winning team</strong>, in Archenemy the <strong>archenemy</strong> or the
+        <strong>team</strong> as the winner.</li>
+        </ul>
+        <p>Finish with <strong>“Confirm”</strong>. If placements are still missing, the dialog
+        points this out (“Please assign a placement to every participant.”). Afterwards –
+        if life total histories were recorded during the game – you are asked whether
+        this history should be saved permanently (see the history chart in chapter 8).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/abschluss.png">
+                <img src="../assets/images/abschluss.png" width="864" height="1939"
+                     alt="“End game” dialog with deck rating and placements" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/abschluss_livepoints_hochkant.png">
+                <img src="../assets/images/abschluss_livepoints_hochkant.png" width="864" height="1939"
+                     alt="“Save life history?” prompt after ending the game" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="8-partien-historie-und-detailansicht">8. Game History and Detail View</h2>
+        <p>The <strong>Games</strong> tab shows all recorded games in chronological
+        order, grouped by year and month – each with the number of games and
+        individually expandable and collapsible. At the top, a search field lets you search the games by
+        player, commander or deck, and you can filter by game mode. Tapping
+        a game opens the <strong>detail view</strong> with:</p>
+        <ul>
+        <li>the key data (date, mode, duration, group),</li>
+        <li>all participants including color identity, turn order, placement/result and
+        deck played; the winner is marked with a trophy, and whoever took the first damage
+        with “First Blood”,</li>
+        <li>in Commander games, the commander damage each participant received,
+        broken down by commander,</li>
+        <li>and, if recorded and saved in a live game, the
+        <strong>life history chart</strong> at the end of the detail view – it shows the
+        life totals of all participants over the course of the game as a line chart.</li>
+        </ul>
+        <p>The <strong>pencil</strong> next to a participant lets you correct details
+        afterwards, such as a misspelled name or a deck or color identity that was
+        selected incorrectly at the start. The <strong>QR icon</strong> at the top right lets you
+        share the game and its data with others.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/partien_overview.png">
+                <img src="../assets/images/partien_overview.png" width="864" height="1939"
+                     alt="Game history with search, mode filter and monthly overview" loading="lazy">
+            </a>
+        </figure>
+
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/partie_01.png">
+                <img src="../assets/images/partie_01.png" width="864" height="1939"
+                     alt="Game detail view with participants, placements and commander damage" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/partie_02.png">
+                <img src="../assets/images/partie_02.png" width="864" height="1939"
+                     alt="Game detail view with life history chart" loading="lazy">
+            </a>
+        </figure>
+        <hr />
+        <h2 id="9-statistik">9. Statistics</h2>
+        <p>The <strong>Statistics</strong> tab brings together all analyses of your games.
+        At the top, you can narrow the selection by <strong>game mode</strong>, <strong>time span</strong> and (with
+        player tracking enabled) <strong>group</strong> – all of the following
+        values always refer only to the current selection.</p>
+        <p><strong>Key figures row:</strong> win rate, number of games, longest win streak.</p>
+        <p><strong>Results:</strong> a donut chart showing the split into wins, losses
+        and draws, plus the <strong>draw rate</strong> below it as a separate
+        figure (how often a game ends in a draw, independently of
+        the general win rate, which counts a draw as a non-loss).</p>
+        <p><strong>Score:</strong> the same personal value as on the Home tab (0–100, with a
+        rating such as “Outstanding”), but calculated only from the games in the current
+        selection. The calculation itself is identical; only the games included
+        change (see <a href="#score-berechnung">“How the score is calculated”</a> for details).</p>
+        <p><strong>Activity by month:</strong> a line chart showing how many games
+        were played in each month.</p>
+        <p><strong>Further detailed figures</strong> (each only visible when there is data
+        for it): average game duration, average placement,
+        average number of mulligans including win rate with/without mulligan,
+        average deck performance rating, commander kills dealt/taken,
+        <strong>First Blood</strong> (how often you took the first damage dealt, including a win rate comparison), <strong>“The problem at the table”</strong> (how
+        often you yourself were marked as such at the moment of elimination, including a
+        win rate comparison) and the <strong>comeback rate</strong> (wins despite critically
+        low life totals).</p>
+        <p><strong>Comparison overviews</strong> by color identity, turn order, game duration,
+        deck archetype, deck build type, bracket, commander partner and deck ownership
+        (own vs. borrowed deck) each show the win rate for the
+        respective group.</p>
+        <p><strong>Lending analysis:</strong> a separate analysis of how the win rate
+        turns out when other people borrow and play your decks.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/statistic01.jpg">
+                <img src="../assets/images/statistic01.jpg" width="945" height="1864"
+                     alt="Statistics with filters, key figures and results donut" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/statistic03.jpg">
+                <img src="../assets/images/statistic03.jpg" width="945" height="1856"
+                     alt="Statistics: score and activity by month" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/statistic02.jpg">
+                <img src="../assets/images/statistic02.jpg" width="945" height="1858"
+                     alt="Statistics: win rate by turn order and game duration" loading="lazy">
+            </a>
+        </figure>
+
+        <h3 id="score-berechnung">How the score is calculated</h3>
+        <p>The score is based on the <strong>Elo system</strong> known from chess, but
+        deliberately simplified: only you get a rating. Other players have no
+        rating of their own – they only count indirectly through the number of participants in a game.</p>
+
+        <p><strong>Which games count?</strong> Only <em>completed</em> games. Ongoing or
+        unfinished live games are never included. On the Home tab, all
+        completed games are taken into account; on the Statistics tab, only those that match the selected
+        group, game mode and time span (All time, 1 year, 6 months, 30 days).</p>
+
+        <p><strong>Step 1 – rate the result of each game.</strong> Each game gets a
+        result value between 0 and 1:</p>
+        <ul>
+        <li><strong>Draw:</strong> 0.5.</li>
+        <li><strong>With placement</strong> (typical for Commander and cEDH): the placement is scaled to the
+        number of participants – 1st place gives 1.0, last place 0.0,
+        and the places in between are evenly distributed
+        (<em>(number of participants − place) ÷ (number of participants − 1)</em>). A 2nd place therefore counts
+        more in a 6-player game (0.8) than in a 4-player game (0.67).</li>
+        <li><strong>Without individual placement</strong> (e.g. team modes such as Two-Headed Giant or
+        Archenemy, or when no placement was recorded): simply win = 1.0,
+        loss = 0.0.</li>
+        </ul>
+
+        <p><strong>Step 2 – adjust the rating.</strong> Everyone starts with the Elo starting rating of
+        1500. The games are processed in chronological order. Since the actual strength
+        of the opponents is unknown, an <em>average opponent</em> is always
+        assumed, against whom you would expect a result of 0.5. Per game,
+        the rating then changes by <em>32 × (result − 0.5)</em>:</p>
+        <ul>
+        <li>Win or 1st place: <strong>+16</strong></li>
+        <li>Draw: <strong>±0</strong></li>
+        <li>Loss or last place: <strong>−16</strong></li>
+        <li>2nd place in a 4-player game: <strong>about +5</strong>, in a 6-player game:
+        <strong>about +10</strong></li>
+        </ul>
+        <p>Every game counts equally, no matter how long ago it was played. If you want to
+        see how things have been going recently, narrow the time span on the Statistics tab (e.g. to
+        30 days).</p>
+
+        <p><strong>Step 3 – convert to 0 to 100.</strong> The rating is converted into a value from
+        0 to 100 using the standard Elo formula. It can be read as your
+        <strong>estimated chance of winning in percent against an average
+        opponent</strong>. The starting rating of 1500 gives exactly 50. Some examples:</p>
+        <table class="simple">
+        <thead><tr><th>Rating</th><th>Score</th></tr></thead>
+        <tbody>
+        <tr><td>1300</td><td>24</td></tr>
+        <tr><td>1400</td><td>36</td></tr>
+        <tr><td>1500</td><td>50</td></tr>
+        <tr><td>1600</td><td>64</td></tr>
+        <tr><td>1700</td><td>76</td></tr>
+        <tr><td>1800</td><td>85</td></tr>
+        </tbody>
+        </table>
+        <p>After a single win, the score is therefore 52 (rating 1516). The more
+        games you have played, the further it can move away from 50.</p>
+
+        <p><strong>Rating label:</strong> In addition to the number, a rating label is shown:</p>
+        <table class="simple">
+        <thead><tr><th>Score</th><th>Rating label</th></tr></thead>
+        <tbody>
+        <tr><td>85 – 100</td><td>Outstanding</td></tr>
+        <tr><td>70 – 84</td><td>Very strong</td></tr>
+        <tr><td>55 – 69</td><td>Strong</td></tr>
+        <tr><td>40 – 54</td><td>Average</td></tr>
+        <tr><td>0 – 39</td><td>Room for improvement</td></tr>
+        </tbody>
+        </table>
+
+        <p><strong>What is not included:</strong> deck strength and bracket, who exactly was at the table,
+        mulligans, life history, commander kills and achievements. The score
+        rates only the result (placement or win, loss or draw).
+        Because only you get a rating, it is a purely personal value. A comparison
+        or ranking between players is deliberately not intended.</p>
+
+        <hr />
+        <h2 id="10-erfolge">10. Achievements</h2>
+        <p>Under <strong>“Your recent achievements”</strong> on the Home tab (link “Show all”),
+        the full <strong>Achievements</strong> overview opens with all available
+        badges, grouped into categories: win streaks, games played, wins,
+        color champion, weekday streaks and special. Badges you have not yet earned
+        are also shown (grayed out) so you can see what is still left
+        to achieve.</p>
+        <p>At the top, the overview shows how many achievements you have unlocked in total
+        (e.g. “21 / 89 achievements unlocked”), and each category shows its own
+        progress (e.g. “Win streaks (2/4)”). Below unlocked badges you’ll find the
+        date and – for achievements that can be earned several times – how often they have been earned.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/erfolge.png">
+                <img src="../assets/images/erfolge.png" width="864" height="1939"
+                     alt="Achievements overview with unlocked and grayed-out badges" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="11-mitspieler-und-gruppen">11. Players and Groups</h2>
+        <p>This section is only available when the <strong>“Track players”</strong> switch
+        (Home tab → More options) is enabled.</p>
+        <ul>
+        <li><strong>“Manage groups”</strong> (shortcut on the Home tab) lets you create
+        <strong>playgroups</strong> – regular play circles that games can be assigned to,
+        for example to filter the statistics by group.
+        Within a group, “Add member” lets you add more players
+        (archived players can optionally be shown as well).</li>
+        <li>Each player has their own <strong>player detail view</strong> with their
+        decks, reachable e.g. via the group detail view. From there, a player
+        profile can also be <strong>shared via QR code</strong> or renamed.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/groups_01.png">
+                <img src="../assets/images/groups_01.png" width="864" height="1939"
+                     alt="Overview of playgroups" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/groups_02.png">
+                <img src="../assets/images/groups_02.png" width="864" height="1939"
+                     alt="Group details with member list" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="12-zusatzmodule-wheel-of-chaos-erzfeind-komplotte-planechase">12. Add-on Modules: Wheel of Chaos, Archenemy Schemes, Planechase</h2>
+        <p>Three optional add-on modules can be enabled independently of each other on the Home tab
+        under “More options”. When a module is active, a matching setup entry appears in the
+        shortcuts, and the corresponding controls appear in the live view:</p>
+        <ul>
+        <li><strong>Wheel of Chaos:</strong> a wheel of fortune with bonus challenges for each color identity
+        that can be spun during the live game using the “Spin wheel” button.
+        The challenges for each color can be edited under “Manage Wheel of Chaos”.</li>
+        <li><strong>Archenemy schemes:</strong> draws scheme cards during the live game in Archenemy mode
+        (ongoing or resolved once). Under “Set up Archenemy schemes”
+        you can choose which sets to draw from (all available sets or a
+        selection of specific sets).</li>
+        <li><strong>Planechase:</strong> draws plane/phenomenon cards, optionally enabled for the entire
+        game (Commander mode only). Under “Set up Planechase”
+        you can also choose the set selection; if the locally
+        stored cards are not enough for the number of participants, a corresponding notice
+        appears during game setup.</li>
+        </ul>
+        <p><strong>Wheel of Chaos in detail:</strong></p>
+        <p><strong>Setup:</strong> Under “Manage Wheel of Chaos”, you define how the five
+        colors are distributed on the wheel (e.g. each color twice) and which challenge is assigned
+        to each color. If a color appears several times on the wheel, it always triggers the same
+        challenge. The wheel has five stages, each of which can be edited on its own tab;
+        stage 1 applies at the start of every game. The challenges are just display text that you
+        carry out yourselves at the table. The idea for the Wheel of Chaos comes from “herumkommandiert”
+        (<a href="https://www.twitch.tv/herumkommandiert" target="_blank" rel="noopener noreferrer">Twitch</a>
+        and <a href="https://www.youtube.com/c/herumkommandiert" target="_blank" rel="noopener noreferrer">YouTube</a>).</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/woc01.png">
+                <img src="../assets/images/woc01.png" width="864" height="1939"
+                     alt="Manage Wheel of Chaos: color distribution and challenges per color" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>In the game:</strong> “Spin wheel” in the live view opens the wheel of fortune at the
+        current stage. After spinning, the color landed on is shown with its challenge, which
+        you confirm with “Next”; “Spin again” spins the wheel once more.
+        The stage increases automatically once the wheel has been spun as many times as there are players
+        in the game – i.e. as soon as, in theory, everyone has spun once. Since the app cannot tell
+        who is spinning, it only counts the number of spins for this.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/woc02.png">
+                <img src="../assets/images/woc02.png" width="1939" height="864"
+                     alt="Wheel of Chaos wheel in the live view" loading="lazy">
+            </a>
+            <a class="zoom landscape" href="../assets/images/woc03.png">
+                <img src="../assets/images/woc03.png" width="1939" height="864"
+                     alt="Wheel result with the challenge for the color landed on" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Archenemy schemes in detail:</strong></p>
+        <p><strong>Setup:</strong> Under “Set up Archenemy schemes”, choose “All sets”
+        or “Specific sets” and tick the sets you want. “Sync now”
+        downloads the scheme cards of the selected sets from Scryfall and stores them
+        locally – after that, drawing during live tracking also works without an
+        internet connection.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/arc01.png">
+                <img src="../assets/images/arc01.png" width="864" height="1939"
+                     alt="Set up Archenemy schemes: set selection and sync" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Drawing a scheme:</strong> In the live view, the archenemy’s tile has an
+        additional green scheme icon in the corner. Tapping it draws a scheme card
+        from the selected sets.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/arc02.png">
+                <img src="../assets/images/arc02.png" width="1939" height="864"
+                     alt="Live view in Archenemy mode with the scheme icon on the archenemy’s tile" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Display:</strong> The drawn card is shown large and facing the archenemy’s side
+        of the table, together with its name and card type (e.g. “Ongoing Scheme”). “Resolved”
+        completes the scheme and closes the card. Ongoing schemes can instead be kept
+        in play with “Keep open”.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/arc03.png">
+                <img src="../assets/images/arc03.png" width="1939" height="864"
+                     alt="Drawn scheme card with the “Resolved” and “Keep open” buttons" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>Ongoing schemes:</strong> Schemes kept open appear as an additional
+        icon on the archenemy’s tile; a number on the icon shows how many are currently open.
+        Tapping it opens the “Open ongoing schemes” list with all currently
+        active schemes.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/arc04.png">
+                <img src="../assets/images/arc04.png" width="1939" height="864"
+                     alt="Archenemy tile with the icon for open ongoing schemes" loading="lazy">
+            </a>
+            <a class="zoom landscape" href="../assets/images/arc05.png">
+                <img src="../assets/images/arc05.png" width="1939" height="864"
+                     alt="“Open ongoing schemes” list" loading="lazy">
+            </a>
+        </figure>
+
+        <p><strong>Planechase in detail:</strong></p>
+        <p><strong>Setup:</strong> Under “Set up Planechase”, choose “All sets” or
+        “Specific sets” and tick the sets you want. “Sync now” downloads
+        the plane and phenomenon cards of the selected sets from Scryfall and stores them
+        locally.</p>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/planechase01.png">
+                <img src="../assets/images/planechase01.png" width="864" height="1939"
+                     alt="Set up Planechase: set selection and sync" loading="lazy">
+            </a>
+        </figure>
+        <p><strong>In the game:</strong> Planechase is enabled when creating a game with the switch
+        “Use plane/phenomenon cards for this game” (see chapter 5). In the
+        live view, the current card then lies in the middle of the table; “Change plane”
+        reveals the next card.</p>
+        <figure class="screenshots">
+            <a class="zoom landscape" href="../assets/images/planechase02.png">
+                <img src="../assets/images/planechase02.png" width="1939" height="864"
+                     alt="Planechase card in the live view" loading="lazy">
+            </a>
+        </figure>
+
+
+        <hr />
+        <h2 id="13-daten-exportieren-importieren-und-sichern">13. Exporting, Importing and Backing Up Data</h2>
+        <ul>
+        <li><strong>Export data</strong> (shortcut on the Home tab): choose which
+        categories to export (players, decks, groups, games). This creates
+        a JSON file, which you can then either pass on via <strong>“Share as file”</strong> using
+        the system share menu (e.g. via messenger, email or cloud storage) or
+        store in any folder on the device via <strong>“Save to folder”</strong>.</li>
+        <li><strong>Import data</strong> (shortcut on the Home tab): offers three ways –
+        <strong>“Choose file”</strong> for a previously exported JSON file,
+        <strong>“Scan QR code”</strong> for a shared QR code and <strong>“Restore from
+        backup”</strong> for the automatic backup. While importing, the app asks about
+        possible duplicates
+        (e.g. “Same person?” for a player name it already knows, or whether
+        an existing deck should be updated).</li>
+        <li><strong>Share a single deck, player profile or game via QR code:</strong> quicker
+        than the full export wizard, directly via the QR icon in the deck list, the
+        player detail view or the game detail view. <strong>“Scan QR code”</strong>
+        in the import section lets you read in a deck, player profile or game shared
+        this way.</li>
+        <li><strong>Automatic backup</strong> (Home tab → More options, enabled by
+        default): writes a backup file to an app-specific folder on the device
+        when the app is closed – strictly local, without a cloud account
+        or any transfer. You restore it via “Import data” →
+        “Restore from backup”.
+        In addition, <strong>“Back up now”</strong> lets you create an
+        additional backup copy immediately at any time, e.g. before switching devices.</li>
+        </ul>
+        <figure class="screenshots">
+            <a class="zoom" href="../assets/images/export.png">
+                <img src="../assets/images/export.png" width="864" height="1939"
+                     alt="Export data: category selection, share or save to folder" loading="lazy">
+            </a>
+            <a class="zoom" href="../assets/images/import.png">
+                <img src="../assets/images/import.png" width="864" height="1939"
+                     alt="Import data: choose file, scan QR code or restore from backup" loading="lazy">
+            </a>
+        </figure>
+
+        <hr />
+        <h2 id="14-häufige-fragen">14. FAQ</h2>
+        <p class="faq"><strong>I didn’t track life totals live during the game – can I still
+        record the result?</strong><br>
+        Yes, via “Add manually” when creating a new game (see
+        chapter 5). You can enter the result, placements and mulligans
+        afterwards; only the minute-by-minute life history is missing.</p>
+        <p class="faq"><strong>How do I change my own player name or see my decks?</strong><br>
+        Via the player detail view of your own profile, reachable from the
+        Decks tab (you can also rename yourself there at the top right).</p>
+        <p class="faq"><strong>Does the random deck favor decks I haven’t played in a while?</strong><br>
+        No. All of your own decks that match the selected filters have exactly
+        the same chance of being drawn – regardless of last game, win rate
+        or rating (see <a href="#zufalls-deck">chapter 3</a>).</p>
+        <p class="faq"><strong>Why does the score on the Home tab show a different value than in the statistics?</strong><br>
+        The Home tab always uses all completed games, the statistics only
+        those that match the selected filters (group, game mode, time span). The
+        calculation is the same (see <a href="#score-berechnung">chapter 9</a>).</p>
+        <p class="faq"><strong>I only play for myself – do I need groups/players?</strong><br>
+        No – if “Track players” is disabled (the default when choosing “Just
+        me” during initial setup), all related parts of the interface
+        disappear completely, without losing any features that relate to
+        your own games.</p>
+        <p class="faq"><strong>Where is my data stored?</strong><br>
+        Exclusively locally on your own device. For transferring it to a
+        new device or as an additional backup, see chapter 13
+        (export/backup).</p>
+        <hr />
+        <p><em>This manual is continuously updated as new features are added. Feedback
+        and questions are always welcome – just pass them on to the developer.</em></p>
+
+        <footer>
+            <p>
+                © 2026 Michaela Schick · TAP – Track &amp; Play ·
+                <a href="privacy/index.html">Privacy Policy</a>
+            </p>
+        </footer>
+    </article>
+</main>
+<script>
+    // Show images with class="zoom" enlarged on click (without JavaScript the link opens the original image)
+    (function () {
+        var overlay = document.createElement("div");
+        overlay.className = "lightbox";
+        overlay.hidden = true;
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Image view");
+        var big = document.createElement("img");
+        var closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.className = "lightbox-close";
+        closeBtn.setAttribute("aria-label", "Close");
+        closeBtn.textContent = "×";
+        overlay.appendChild(big);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+        var opener = null;
+
+        function close() {
+            overlay.hidden = true;
+            document.body.classList.remove("no-scroll");
+            big.removeAttribute("src");
+            if (opener) opener.focus();
+        }
+
+        document.addEventListener("click", function (e) {
+            var link = e.target.closest("a.zoom");
+            if (!link || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+            e.preventDefault();
+            opener = link;
+            var thumb = link.querySelector("img");
+            big.src = link.href;
+            big.alt = thumb ? thumb.alt : "";
+            overlay.hidden = false;
+            document.body.classList.add("no-scroll");
+            closeBtn.focus();
+        });
+        overlay.addEventListener("click", close);
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && !overlay.hidden) close();
+        });
+    })();
+</script>
+<script>
+    // Sprachumschalter: den aktuellen Abschnitt (#Anker) beim Wechsel beibehalten
+    (function () {
+        var links = document.querySelectorAll(".lang-switch a[hreflang]");
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function () {
+                this.hash = location.hash;
+            });
+        }
+    })();
+</script>
+</body>
+</html>
